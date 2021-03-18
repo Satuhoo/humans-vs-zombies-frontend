@@ -1,13 +1,27 @@
 import Game from '../games/Game';
-import { Link } from 'react-router-dom';
+import GameService from '../../services/game.service';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function GameList() {
+    const [games, setGames] = useState([]);
+    const history = useHistory();
+
+    useEffect(() => {
+        GameService.getAllGames()
+        .then(response => setGames(response.data))
+    }, [])
+
+    const handleClickGame = (id) => {
+        history.push(`/games/${id}`)
+    }
+
     return (
         <div>
             <h1>Games</h1>
-            <Link className="link" to="/games/:id">
-                <Game />
-            </Link>
+            {games.map((game) => 
+                <Game game={game} key={game.id} gameClicked={handleClickGame}/>
+            )}
         </div>
     )
 }

@@ -1,9 +1,13 @@
-function Game() {
+function Game({game, gameClicked}) {
+    const handleClickGame = () => {
+        gameClicked(game.id)
+    }
+
     return (
-        <div>
-            <h2>Game</h2>
+        <div onClick={handleClickGame}>
+            <h2>{game.name}</h2>
         </div>
     )
 }
 
-export default Game; 
+export default Game;

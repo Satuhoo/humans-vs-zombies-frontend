@@ -1,7 +1,14 @@
+import { Link } from 'react-router-dom';
+import '../styles/Header.css';
+
 function Header() {
     return (
-        <div>
+        <div className="header-container">
             <h1>Humans vs. Zombies</h1>
+            <div>
+                <Link className="link" to="/games">Games</Link>
+                <Link className="link" to="/admin">Admin view</Link>
+            </div>
         </div>
     )
 }

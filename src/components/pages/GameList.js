@@ -12,8 +12,8 @@ function GameList() {
         .then(response => setGames(response.data))
     }, [])
 
-    const handleClickGame = (id) => {
-        history.push(`/games/${id}`)
+    const handleClickGame = (game) => {
+        history.push(`/games/${game.id}`)
     }
 
     return (

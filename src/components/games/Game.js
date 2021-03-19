@@ -1,6 +1,6 @@
 function Game({game, gameClicked}) {
     const handleClickGame = () => {
-        gameClicked(game.id)
+        gameClicked(game)
     }
 
     return (

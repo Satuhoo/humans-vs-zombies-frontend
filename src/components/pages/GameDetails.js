@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import GameService from '../../services/game.service';
+import { useEffect } from "react";
+import { getGame } from '../../store/actions/gameActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function GameDetails(props) {
     const id = props.match.params.id;
-    const [game, setGame] = useState({});
+    const game = useSelector(state => state.gameReducer.game);
+    const dispatch = useDispatch();
     
     useEffect(() => {
-        GameService.getGameByID(id)
-        .then(response => setGame(response.data))
-    }, [id])
+        dispatch(getGame(id));
+    }, [id, dispatch])
 
     return (
         <div>

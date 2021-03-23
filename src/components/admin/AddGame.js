@@ -1,13 +1,14 @@
 import { useState } from "react";
-import GameService from '../../services/game.service';
+import { useDispatch } from "react-redux";
 import GameForm from '../forms/GameForm';
+import { createGame } from '../../store/actions/gameActions';
 
-function AddGame({games, handleGamesChange}) {
+function AddGame({hideForm}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const dispatch = useDispatch();
     
     const handleNameChange = (event) => {
-        console.log(event.target.value)
         setName(event.target.value);
     }
 
@@ -19,13 +20,13 @@ function AddGame({games, handleGamesChange}) {
         event.preventDefault();
         const newGame = {
             name,
-            description
+            description,
+            players: [],
+            kills: [],
+            chat: null
         }
-        GameService.addGame(newGame)
-        .then(returnedGame => {
-            console.log(returnedGame.data);
-            handleGamesChange(games.concat(returnedGame.data));
-        })
+        dispatch(createGame(newGame));
+        hideForm();
     }
 
     return (

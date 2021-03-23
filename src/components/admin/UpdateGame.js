@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import GameService from '../../services/game.service';
 import GameForm from '../forms/GameForm';
+import { useDispatch } from "react-redux";
+import { updateGameById, deleteGameById } from '../../store/actions/gameActions';
 
-function UpdateGame({game, games, handleGamesChange}) {
+function UpdateGame({game, hideForm}) {
     const [name, setName] = useState(game.name);
     const [description, setDescription] = useState(game.description);
+    const dispatch = useDispatch();
     
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -17,24 +19,18 @@ function UpdateGame({game, games, handleGamesChange}) {
     const updateGame = (event) => {
         event.preventDefault();
         const updatedGame = {
-            id: game.id,
+            ...game,
             name,
             gameState: 'IN_PROGRESS',
-            chat_id: null
         }
-        GameService.updateGame(game.id, updatedGame)
-        .then(returnedGame => {
-            let removeIndex = games.map(function(item) { return item.id; }).indexOf(game.id);
-            games.splice(removeIndex, 1);
-            handleGamesChange(games.concat(returnedGame.data));
-        })
+        dispatch(updateGameById(updatedGame));
+        hideForm();
     }
 
-    const deleteGame = () => {
-        GameService.deleteGame(game.id);
-        let removeIndex = games.map(function(item) { return item.id; }).indexOf(game.id);
-        games.splice(removeIndex, 1);
-        handleGamesChange(games);
+    const deleteGame = (event) => {
+        event.preventDefault();
+        dispatch(deleteGameById(game.id))
+        hideForm();
     }
 
     return (

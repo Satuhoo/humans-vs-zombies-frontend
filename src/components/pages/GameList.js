@@ -1,16 +1,17 @@
 import Game from '../games/Game';
-import GameService from '../../services/game.service';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getGames } from '../../store/actions/gameActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function GameList() {
-    const [games, setGames] = useState([]);
     const history = useHistory();
+    const games = useSelector(state => state.gameReducer.games);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        GameService.getAllGames()
-        .then(response => setGames(response.data))
-    }, [])
+        dispatch(getGames());
+    }, [dispatch])
 
     const handleClickGame = (game) => {
         history.push(`/games/${game.id}`)

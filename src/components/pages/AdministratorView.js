@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
-import GameService from '../../services/game.service';
 import Game from '../games/Game';
 import UpdateGame from '../admin/UpdateGame';
 import AddGame from '../admin/AddGame';
+import { useDispatch, useSelector } from 'react-redux';
+import { getGames } from '../../store/actions/gameActions';
 import '../styles/AdminView.css';
 
 function AdministrationView() {
-    const [games, setGames] = useState([]);
+    const games = useSelector(state => state.gameReducer.games);
     const [game, setGame] = useState({});
     const [showUpdateGame, setShowUpdateGame] = useState(false);
     const [showCreateGame, setShowCreateGame] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        GameService.getAllGames()
-        .then(response => setGames(response.data))
-    }, [])
+        dispatch(getGames());
+    }, [dispatch])
 
     const handleClickGame = (game) => {
         setGame(game);
@@ -27,8 +28,7 @@ function AdministrationView() {
         setShowCreateGame(true);
     }
 
-    const handleGamesChange = (newGameList) => {
-        setGames(newGameList);
+    const hideForm = () => {
         setShowCreateGame(false);
         setShowUpdateGame(false);
     }
@@ -37,8 +37,8 @@ function AdministrationView() {
         <div className="admin-container">
             <div>
                 <h1>Administration view</h1>
-                {showUpdateGame && <UpdateGame game={game} games={games} handleGamesChange={handleGamesChange}/>}
-                {showCreateGame && <AddGame games={games} handleGamesChange={handleGamesChange}/>}
+                {showUpdateGame && <UpdateGame game={game} hideForm={hideForm}/>}
+                {showCreateGame && <AddGame hideForm={hideForm}/>}
                 <button onClick={handleClickAddGame}>Add game</button>
             </div>
             <div>

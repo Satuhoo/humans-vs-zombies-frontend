@@ -8,6 +8,7 @@ function Header() {
             <div>
                 <Link className="link" to="/games">Games</Link>
                 <Link className="link" to="/admin">Admin view</Link>
+                <Link className="link" to="/login">Login</Link>
             </div>
         </div>
     )

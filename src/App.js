@@ -11,8 +11,7 @@ import LoginPage from "./components/shared/Login";
 function App() {
   return (
     <ReactKeycloakProvider authClient={keycloak}>
-    <div>
-      
+    <div>      
       <Router>
         <Header />
         <Switch>
@@ -22,8 +21,7 @@ function App() {
           <Route path="/login" component={LoginPage}/>          
           <Route path="*" component={NotFound} />
         </Switch>
-      </Router>
-      
+      </Router>      
     </div>
     </ReactKeycloakProvider>
   );

@@ -1,26 +1,27 @@
   
-import React from 'react';
-import { useCallback } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, {useEffect} from 'react';
+import { Redirect } from 'react-router-dom' 
 import { useKeycloak } from '@react-keycloak/web'
+import GameDetails from '../pages/GameDetails';
 
 const LoginPage = () => { 
-   const { keycloak } = useKeycloak();
+   const { keycloak, initialized } = useKeycloak();
 
-   const login = useCallback(() => {
-    keycloak.login()    
-  }, [keycloak])
 
-  if (keycloak.authenticated){
-    console.log(keycloak.token)
-    return <Redirect to="/"/>
-  }
+   useEffect(() => {
+    if (initialized){
+      if (!keycloak.authenticated){
+      keycloak.login()
+    }else{
+      console.log(keycloak.token)      
+    }}}); 
+    if (initialized && keycloak.authenticated){
+      return <Redirect to='/games'/>
+    }
 
   return (
     <div>
-      <button type="button" onClick={login}>
-        Login
-      </button>
+      <p>Initializing authentiation server...</p>
     </div>
   )
 }

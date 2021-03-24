@@ -25,9 +25,7 @@ export function gameReducer(state = initialState, action) {
         case 'UPDATE_GAME':
             return {
                 ...state,
-                games: state.games.map(game => 
-                    game.id === action.id ? action.updatedGame : game
-                ) 
+                game: action.updatedGame
             }
         case 'DELETE_GAME':
             return {

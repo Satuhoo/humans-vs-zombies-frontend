@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import { Redirect } from 'react-router-dom' 
 import { useKeycloak } from '@react-keycloak/web'
-import GameDetails from '../pages/GameDetails';
+
 
 const LoginPage = () => { 
    const { keycloak, initialized } = useKeycloak();
@@ -10,12 +10,12 @@ const LoginPage = () => {
 
    useEffect(() => {
     if (initialized){
-      if (!keycloak.authenticated){
-      keycloak.login()
-    }else{
-      console.log(keycloak.token)      
-    }}}); 
+      if (!keycloak.authenticated)
+        keycloak.login()        
+      }}) 
+
     if (initialized && keycloak.authenticated){
+      console.log(keycloak.token)
       return <Redirect to='/games'/>
     }
 

@@ -8,14 +8,14 @@ const LoginPage = () => {
    const { keycloak, initialized } = useKeycloak();
 
 
-   useEffect(() => {
+   useEffect(() => { 
     if (initialized){
       if (!keycloak.authenticated)
         keycloak.login()        
       }}) 
 
     if (initialized && keycloak.authenticated){
-      console.log(keycloak.token)
+      console.log(keycloak.token)      
       return <Redirect to='/games'/>
     }
 

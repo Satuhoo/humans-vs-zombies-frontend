@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getGame } from '../../store/actions/gameActions';
+import { addPlayerToGame } from '../../store/actions/playerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
 import Map from '../map/Map';
@@ -9,13 +10,13 @@ import Title from '../games/Title';
 import Rules from '../games/Rules';
 import UpdateGame from '../admin/UpdateGame';
 import { useKeycloak } from '@react-keycloak/web'
-import { Redirect } from 'react-router-dom' 
-
+import { Redirect } from 'react-router-dom';
 
 function GameDetails(props) {    
     const { keycloak } = useKeycloak();
     const id = props.match.params.id;
     const game = useSelector(state => state.gameReducer.game);
+    const player = useSelector(state => state.playerReducer.player);
     const dispatch = useDispatch();
     const [registered, setRegistered] = useState(false);
     const [biteCode, setBiteCode] = useState('');
@@ -25,8 +26,13 @@ function GameDetails(props) {
         dispatch(getGame(id));
     }, [id, dispatch])
 
-    const handleRegistration = () => {
+    const handleRegistration = (event) => {
+        event.preventDefault();
         setRegistered(true);
+        const newPlayer = {
+            game_id: game.id
+        };
+        dispatch(addPlayerToGame(game.id, newPlayer));
     }
 
     const handleBiteCodeChange = (event) => {
@@ -57,7 +63,7 @@ function GameDetails(props) {
             <div>
                 {!showEditView ? <Title game={game} registered={registered} handleClickEdit={handleClickEdit}/>: 
                     <UpdateGame game={game} hideForm={hideForm}/> }
-                {registered ? <p><br></br>Player state</p>: <button onClick={handleRegistration}>Join</button>}
+                {registered ? <p><br></br>Player id {player.id}</p>: <button onClick={handleRegistration}>Join</button>}
                 {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}
             </div>
             <div>

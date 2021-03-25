@@ -1,6 +1,10 @@
 @import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
-/* @import 'leaflet/dist/leaflet.css'; */
-@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.admin-grid-container {
+    display: grid;
+    grid-template-columns: 6fr 3fr 1fr;
+    margin: 10px 0px 5px 70px;
+}
 
 .game-details-container {
     display: flex;
@@ -15,6 +19,11 @@
 .title-container {
     display: flex;
     justify-content: space-between;
+}
+
+.edit-btn {
+    height: 20px;
+    margin-top: 10px;
 }
 
 .leaflet-container {
@@ -32,9 +41,22 @@
 }
 
 .title-input {
-    font-weight: bold;
     font-size: 20px;
-    margin-top: 30px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.update-form {
+    margin-top: 22px;
+    margin-left: -22px;
+}
+
+.update-btn{
+    margin-top: 20px;
+}
+
+.delete-container {
+    align-items: flex-end;
 }
 
 @media (max-width: 800px) {
@@ -46,5 +68,11 @@
     }
     .chat-container {
         width: 80%;
+    }
+    .admin-grid-container {
+        margin: 10px 0px 20px 0px;
+    }
+    .update-form {
+        margin-left: 0px;
     }
 }

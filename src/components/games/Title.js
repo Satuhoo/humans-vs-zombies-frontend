@@ -1,9 +1,12 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPen} from '@fortawesome/free-solid-svg-icons';
+
 function Title({game, registered, handleClickEdit}) {
     return (
         <div>
             <div className="title-container">
                 <h2>{game.name}</h2>
-                {registered && <button onClick={handleClickEdit}>Edit</button>}
+                {registered && <button className="edit-btn" onClick={handleClickEdit}><FontAwesomeIcon  className="icon" icon={faPen}/></button> }
             </div>
             <h3>Description</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 

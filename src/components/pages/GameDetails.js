@@ -8,7 +8,10 @@ import BiteCodeForm from '../forms/BiteCodeForm';
 import Title from '../games/Title';
 import Rules from '../games/Rules';
 import UpdateGame from '../admin/UpdateGame';
-
+import UpdateGameState from '../admin/UpdateGameState';
+import DeleteGame from '../admin/DeleteGame';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 function GameDetails(props) {
     const id = props.match.params.id;
@@ -45,7 +48,17 @@ function GameDetails(props) {
     }
 
     return (
-        <div className="game-details-container">
+        <div>
+            <div className="admin-grid-container">
+            <div>
+                {showEditView && <button onClick={hideForm}><FontAwesomeIcon  className="icon" icon={faAngleLeft}/></button>}
+            </div>
+            <div>
+                {registered && <UpdateGameState game={game}/>}
+            </div>
+                {showEditView && <DeleteGame game={game}/>}
+            </div>
+            <div className="game-details-container">
             <div>
                 {!showEditView ? <Title game={game} registered={registered} handleClickEdit={handleClickEdit}/>: 
                     <UpdateGame game={game} hideForm={hideForm}/> }
@@ -61,6 +74,7 @@ function GameDetails(props) {
                 <h3>Chat</h3>
                 <Chat />
             </div>}
+        </div>
         </div>
     )
 }

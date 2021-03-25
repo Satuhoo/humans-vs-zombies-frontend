@@ -14,7 +14,7 @@ const LoginPage = () => {
     if (initialized){
       if (!keycloak.authenticated)
         keycloak.login()
-        keycloak.onAuthSuccess(dispatch(login(keycloak.subject)))        
+        keycloak.onAuthSuccess(dispatch(login(keycloak.subject, keycloak.hasRealmRole('admin'))))        
       }}) 
 
     if (initialized && keycloak.authenticated){

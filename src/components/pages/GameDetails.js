@@ -9,11 +9,11 @@ import BiteCodeForm from '../forms/BiteCodeForm';
 import Title from '../games/Title';
 import Rules from '../games/Rules';
 import UpdateGame from '../admin/UpdateGame';
-import { useKeycloak } from '@react-keycloak/web'
-import { Redirect } from 'react-router-dom';
+
+
 
 function GameDetails(props) {    
-    const { keycloak } = useKeycloak();
+     
     const id = props.match.params.id;
     const game = useSelector(state => state.gameReducer.game);
     const player = useSelector(state => state.playerReducer.player);
@@ -54,12 +54,7 @@ function GameDetails(props) {
 
     return (
         
-        <div className="game-details-container">       
-         {!keycloak.authenticated &&
-                <div>              
-                <Redirect to="/login"/>                
-            </div>            
-            }             
+        <div className="game-details-container">           
             <div>
                 {!showEditView ? <Title game={game} registered={registered} handleClickEdit={handleClickEdit}/>: 
                     <UpdateGame game={game} hideForm={hideForm}/> }

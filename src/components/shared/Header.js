@@ -3,18 +3,10 @@ import '../styles/Header.css';
 import { useKeycloak } from '@react-keycloak/web'
 
 function Header() {
-    const { keycloak, initialized } = useKeycloak();
+    const {keycloak} = useKeycloak();
     return (
         <div className="header-container">
-            <h1>Humans vs. Zombies</h1>
-            <div>
-                <div>
-                {!initialized &&
-                <div> 
-                <p>Initializing authentiation server..</p>         
-                </div>}
-            </div>
-            </div>
+            <h1>Humans vs. Zombies</h1>            
                 <div>
                 {keycloak.authenticated &&
                 <div> 

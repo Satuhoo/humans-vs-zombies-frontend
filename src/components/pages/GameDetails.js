@@ -5,7 +5,10 @@ import '../styles/GameDetails.css';
 import Map from '../map/Map';
 import Chat from '../chat/Chat';
 import BiteCodeForm from '../forms/BiteCodeForm';
+import Title from '../games/Title';
 import Rules from '../games/Rules';
+import UpdateGame from '../admin/UpdateGame';
+
 
 function GameDetails(props) {
     const id = props.match.params.id;
@@ -13,6 +16,7 @@ function GameDetails(props) {
     const dispatch = useDispatch();
     const [registered, setRegistered] = useState(false);
     const [biteCode, setBiteCode] = useState('');
+    const [showEditView, setShowEditView] = useState(false);
 
     useEffect(() => {
         dispatch(getGame(id));
@@ -29,19 +33,24 @@ function GameDetails(props) {
 
     const handleBite = (event) => {
         event.preventDefault();
-        console.log('bite')
+        console.log('bite');
+    }
+
+    const handleClickEdit = () => {
+        setShowEditView(true);
+    }
+
+    const hideForm = () => {
+        setShowEditView(false);
     }
 
     return (
         <div className="game-details-container">
             <div>
-                <h2>{game.name}</h2>
-                <h3>Description</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                    tempor incididunt ut labore et dolore magna aliqua. 
-                </p>
+                {!showEditView ? <Title game={game} registered={registered} handleClickEdit={handleClickEdit}/>: 
+                    <UpdateGame game={game} hideForm={hideForm}/> }
                 {registered ? <p><br></br>Player state</p>: <button onClick={handleRegistration}>Join</button>}
-                {registered && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}
+                {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}
             </div>
             <div>
                 <Rules />

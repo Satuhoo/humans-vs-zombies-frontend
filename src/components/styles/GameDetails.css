@@ -2,8 +2,21 @@
 
 .admin-grid-container {
     display: grid;
-    grid-template-columns: 6fr 3fr 1fr;
-    margin: 10px 0px 5px 70px;
+    grid-template-columns: 3fr 1fr;
+    padding: 8px 0px 8px 70px;
+    background-color: black;
+}
+
+.admin-btn-flex-container {
+    display: flex;
+}
+
+.admin-btn {
+    margin-left: 20px;
+}
+
+.complete-text {
+    color:rgb(19, 158, 158);
 }
 
 .game-details-container {
@@ -21,11 +34,6 @@
     justify-content: space-between;
 }
 
-.edit-btn {
-    height: 20px;
-    margin-top: 10px;
-}
-
 .leaflet-container {
     width: 100%;
     height: 40vh;
@@ -38,12 +46,6 @@
 .chat {
     border: 1px solid lightgray;
     height: 70%;
-}
-
-.title-input {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 15px;
 }
 
 .update-form {
@@ -70,7 +72,11 @@
         width: 80%;
     }
     .admin-grid-container {
-        margin: 10px 0px 20px 0px;
+        padding: 5px 0px 5px 0px;
+        grid-template-columns: 2fr 1fr;
+    }
+    .admin-btn {
+        margin-left: 5px;
     }
     .update-form {
         margin-left: 0px;

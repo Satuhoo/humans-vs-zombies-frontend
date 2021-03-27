@@ -7,16 +7,11 @@ import Map from '../map/Map';
 import Chat from '../chat/Chat';
 import BiteCodeForm from '../forms/BiteCodeForm';
 import Title from '../games/Title';
-import Rules from '../games/Rules';
 import UpdateGame from '../admin/UpdateGame';
-import UpdateGameState from '../admin/UpdateGameState';
-import DeleteGame from '../admin/DeleteGame';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-
+import Button from 'react-bootstrap/Button';
+import AdminBar from "../admin/AdminBar";
 
 function GameDetails(props) {    
-     
     const id = props.match.params.id;
     const game = useSelector(state => state.gameReducer.game);
     const player = useSelector(state => state.playerReducer.player);
@@ -57,24 +52,19 @@ function GameDetails(props) {
 
     return (
         <div>
-            <div className="admin-grid-container">
-            <div>
-                {showEditView && <button onClick={hideForm}><FontAwesomeIcon  className="icon" icon={faAngleLeft}/></button>}
-            </div>
-            <div>
-                {registered && <UpdateGameState game={game}/>}
-            </div>
-                {showEditView && <DeleteGame game={game}/>}
-            </div>
+            {registered && <AdminBar game={game} hideForm={hideForm} showEditView={showEditView}
+                handleClickEdit={handleClickEdit} /> }
             <div className="game-details-container">
             <div>
                 {!showEditView ? <Title game={game} registered={registered} handleClickEdit={handleClickEdit}/>: 
                     <UpdateGame game={game} hideForm={hideForm}/> }
-                {registered ? <p><br></br>Player id {player.id}</p>: <button onClick={handleRegistration}>Join</button>}
+                {registered ? <p><br></br>Player id {player.id}</p>: 
+                    <Button variant="info" onClick={handleRegistration}>Join</Button>}
                 {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}
             </div>
             <div>
-                <Rules />
+                <h3>Rules</h3>
+                <p>{game.rules}</p>
                 <h3>Location</h3>
                 <Map />
             </div>

@@ -1,10 +1,17 @@
 .header-container {
     display: flex;
     justify-content: space-between;
+    background-color: black;
+    border-bottom: 1px solid orange;
 }
 
 .header-container > div {
     margin: 20px;
+}
+
+#app-title {
+    color: orange;
+    margin: 20px 0px 20px 50px;
 }
 
 .link {

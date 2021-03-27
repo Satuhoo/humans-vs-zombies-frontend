@@ -7,6 +7,7 @@ import NotFound from './components/pages/NotFound';
 import LoginPage from "./components/shared/Login";
 import PrivateRoute from './components/routes/PrivateRoute'
 import { useKeycloak } from '@react-keycloak/web';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const App = () => {
   const {initialized} = useKeycloak();

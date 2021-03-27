@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { deleteGameById } from '../../store/actions/gameActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import Button from 'react-bootstrap/Button';
 import '../styles/GameDetails.css';
 
 function DeleteGame({game}) {
@@ -17,9 +18,9 @@ function DeleteGame({game}) {
 
     return (
         <div>
-            <button onClick={deleteGame}>
+            <Button className="admin-btn" variant="info" size="sm" onClick={deleteGame}>
                 <FontAwesomeIcon  className="icon" icon={faTrashAlt}/>
-            </button>
+            </Button>
         </div>
     )
 }

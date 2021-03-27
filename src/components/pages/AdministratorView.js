@@ -4,6 +4,7 @@ import UpdateGame from '../admin/UpdateGame';
 import AddGame from '../admin/AddGame';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGames } from '../../store/actions/gameActions';
+import Button from 'react-bootstrap/Button';
 import '../styles/AdminView.css';
 
 function AdministrationView() {
@@ -39,7 +40,7 @@ function AdministrationView() {
                 <h1>Administration view</h1>
                 {showUpdateGame && <UpdateGame game={game} hideForm={hideForm}/>}
                 {showCreateGame && <AddGame hideForm={hideForm}/>}
-                <button onClick={handleClickAddGame}>Add game</button>
+                <Button variant="info" onClick={handleClickAddGame}>Add game</Button>
             </div>
             <div>
                 {games.map((game) => 

@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button';
+
 function BiteCodeForm(props) {
     return (
         <div>
@@ -5,7 +7,7 @@ function BiteCodeForm(props) {
                 <div>
                     Bite Code: <input value={props.biteCode} onChange={props.handleBiteCodeChange} />
                 </div>
-                <button type="submit">Bite</button>
+                <Button variant="info" type="submit">Bite</Button>
             </form>
         </div>
     )

@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { updateGameById } from '../../store/actions/gameActions';
+import Button from 'react-bootstrap/Button';
 
 function UpdateGameState({game}) {
     const dispatch = useDispatch();
@@ -11,7 +12,7 @@ function UpdateGameState({game}) {
             gameState: 'IN_PROGRESS',
             players: []
         }
-        dispatch(updateGameById(updatedGame));
+        dispatch(updateGameById(updatedGame));  
     }
 
     const endGame = (event) => {
@@ -28,8 +29,12 @@ function UpdateGameState({game}) {
         <div>
            {(() => {
                 switch (game.gameState) {
-                case "REGISTRATION": return <button onClick={startGame}>Start game</button>;
-                case "IN_PROGRESS": return <button onClick={endGame}>End game</button>;
+                case "REGISTRATION": 
+                    return <Button variant="info" size="sm" onClick={startGame}>Start game</Button>;
+                case "IN_PROGRESS": 
+                    return <Button variant="info" size="sm" onClick={endGame}>End game</Button>;
+                case "COMPLETE":
+                        return <span className="complete-text">Completed</span>
                 default: return null;
                 }
             })()}

@@ -1,14 +1,16 @@
 import '../styles/GameDetails.css';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 function UpdateGameForm(props) {
     return (
-        <form className="update-form" onSubmit={props.onSubmit}>
-            <input className="title-input" value={props.name} onChange={props.handleNameChange}/>
+        <Form className="update-form" onSubmit={props.onSubmit}>
+            <Form.Control value={props.name} onChange={props.handleNameChange}/>
             <h3>Description</h3>
-            <input className="description-input" value={props.description} onChange={props.handleDescriptionChange}/>
+            <Form.Control value={props.description} onChange={props.handleDescriptionChange}/>
             <br/>
-            <button className="update-btn" type="submit">Update</button>
-        </form>
+            <Button variant="info" className="update-btn" type="submit">Update</Button>
+        </Form>
     )
 }
 

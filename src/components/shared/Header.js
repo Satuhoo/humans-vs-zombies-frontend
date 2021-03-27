@@ -6,7 +6,7 @@ function Header() {
     const {keycloak} = useKeycloak();
     return (
         <div className="header-container">
-            <h1>Humans vs. Zombies</h1>            
+            <h1 id="app-title">Humans vs. Zombies</h1>            
                 <div>
                 {keycloak.authenticated &&
                 <div> 

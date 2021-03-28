@@ -54,25 +54,29 @@ function GameDetails(props) {
         <div>
             {registered && <AdminBar game={game} hideForm={hideForm} showEditView={showEditView}
                 handleClickEdit={handleClickEdit} /> }
-            <div className="game-details-container">
-            <div>
+            <div className="grid-container">
+                <div className="grid-item item1">
                 {!showEditView ? <Title game={game} registered={registered} handleClickEdit={handleClickEdit}/>: 
                     <UpdateGame game={game} hideForm={hideForm}/> }
-                {registered ? <p><br></br>Player id {player.id}</p>: 
+                </div>
+                <div className="grid-item item2">
+                    {registered && <div>
+                        <h3>Game state</h3>
+                        <p>{game.gameState}</p>
+                        <h3>Chat</h3>
+                        <Chat />
+                    </div>}
+                </div>
+                <div className="grid-item item3">
+                    {registered ? <p><br></br>Player id {player.id}</p>: 
                     <Button variant="info" onClick={handleRegistration}>Join</Button>}
-                {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}
+                    {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}    
+                </div>  
+                <div className="grid-item item4">
+                    <h3>Location</h3>
+                    <Map />
+                </div>
             </div>
-            <div>
-                <h3>Rules</h3>
-                <p>{game.rules}</p>
-                <h3>Location</h3>
-                <Map />
-            </div>
-            {registered && <div className="chat-container">
-                <h3>Chat</h3>
-                <Chat />
-            </div>}
-        </div>
         </div>
     )
 }

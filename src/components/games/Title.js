@@ -1,16 +1,16 @@
-
-
-function Title({game, registered, handleClickEdit}) {
+function Title({game}) {
     return (
-        <div>
-            <div className="title-container">
+        <div className="game-details-container">
+            <div>
                 <h2>{game.name}</h2>
-                
+                <br/>
+                <h3>Description</h3>
+                <p>{game.description}</p>
             </div>
-            <h3>Description</h3>
-            <p>{game.description}</p>
-            <h3>Game state</h3>
-            <p>{game.gameState}</p>
+            <div>
+                <h3>Rules</h3>
+                <p>{game.rules}</p>
+            </div>
         </div>
     )
 }

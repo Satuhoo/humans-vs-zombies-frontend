@@ -7,13 +7,22 @@ import NotFound from './components/pages/NotFound';
 import LoginPage from "./components/shared/Login";
 import PrivateRoute from './components/routes/PrivateRoute'
 import { useKeycloak } from '@react-keycloak/web';
+import { useDispatch } from 'react-redux';
+import { login } from '../src/store/actions/userActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const App = () => {
-  const {initialized} = useKeycloak();
+  const { keycloak, initialized } = useKeycloak();
+  const dispatch = useDispatch();
+
   if (!initialized) {
-      return <h4>Loading...</h4>;
+    return <h4>Loading...</h4>; 
   }
+
+  if (keycloak.authenticated){
+    dispatch(login(keycloak.subject, keycloak.hasRealmRole('admin')))
+  }
+
   return (    
     <div>      
       <Router>

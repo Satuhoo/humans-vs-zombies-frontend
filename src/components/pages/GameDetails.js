@@ -15,6 +15,7 @@ function GameDetails(props) {
     const id = props.match.params.id;
     const game = useSelector(state => state.gameReducer.game);
     const player = useSelector(state => state.playerReducer.player);
+    const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [registered, setRegistered] = useState(false);
     const [biteCode, setBiteCode] = useState('');
@@ -52,7 +53,7 @@ function GameDetails(props) {
 
     return (
         <div>
-            {registered && <AdminBar game={game} hideForm={hideForm} showEditView={showEditView}
+            {user.isAdmin && <AdminBar game={game} hideForm={hideForm} showEditView={showEditView}
                 handleClickEdit={handleClickEdit} /> }
             <div className="grid-container">
                 <div className="grid-item item1">
@@ -67,11 +68,14 @@ function GameDetails(props) {
                         <Chat />
                     </div>}
                 </div>
-                <div className="grid-item item3">
+                {!user.isAdmin ? <div className="grid-item item3">
                     {registered ? <p><br></br>Player id {player.id}</p>: 
                     <Button variant="info" onClick={handleRegistration}>Join</Button>}
                     {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}    
-                </div>  
+                </div>
+                : <div>
+                    <p>player list</p>
+                </div> }  
                 <div className="grid-item item4">
                     <h3>Location</h3>
                     <Map />

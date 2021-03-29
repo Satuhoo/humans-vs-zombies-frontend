@@ -1,28 +1,58 @@
 import { useDispatch } from "react-redux";
 import { updateGameById } from '../../store/actions/gameActions';
 import Button from 'react-bootstrap/Button';
+import { confirmAlert } from 'react-confirm-alert';
+import '../styles/Alert.css';
 
 function UpdateGameState({game}) {
     const dispatch = useDispatch();
 
     const startGame = (event) => {
         event.preventDefault();
-        const updatedGame = {
-            ...game,
-            gameState: 'IN_PROGRESS',
-            players: []
-        }
-        dispatch(updateGameById(updatedGame));  
+        confirmAlert({
+            title: 'Start game',
+            message: 'Are you sure to do this?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    const updatedGame = {
+                        ...game,
+                        gameState: 'IN_PROGRESS',
+                        players: []
+                    }
+                    dispatch(updateGameById(updatedGame)); 
+                }
+              },
+              {
+                label: 'No',
+              }
+            ]
+          }); 
     }
 
     const endGame = (event) => {
         event.preventDefault();
-        const updatedGame = {
-            ...game,
-            gameState: 'COMPLETE',
-            players: []
-        }
-        dispatch(updateGameById(updatedGame));
+        confirmAlert({
+            title: 'Finish game',
+            message: 'Are you sure to do this?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    const updatedGame = {
+                        ...game,
+                        gameState: 'COMPLETE',
+                        players: []
+                    }
+                    dispatch(updateGameById(updatedGame));
+                }
+              },
+              {
+                label: 'No',
+              }
+            ]
+          });
     }
 
     return (

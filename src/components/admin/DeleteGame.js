@@ -4,7 +4,9 @@ import { deleteGameById } from '../../store/actions/gameActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
+import { confirmAlert } from 'react-confirm-alert';
 import '../styles/GameDetails.css';
+import '../styles/Alert.css';
 
 function DeleteGame({game}) {
     const history = useHistory();
@@ -12,8 +14,22 @@ function DeleteGame({game}) {
 
     const deleteGame = (event) => {
         event.preventDefault();
-        dispatch(deleteGameById(game.id))
-        history.push('/')
+        confirmAlert({
+            title: 'Delete game',
+            message: 'Are you sure to do this?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    dispatch(deleteGameById(game.id))
+                    history.push('/')
+                }
+              },
+              {
+                label: 'No',
+              }
+            ]
+          });
     }
 
     return (

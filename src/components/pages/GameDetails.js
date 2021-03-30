@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getGame } from '../../store/actions/gameActions';
+import { getLoggedPlayer } from '../../store/actions/playerActions';
 import { addPlayerToGame } from '../../store/actions/playerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
@@ -10,6 +11,8 @@ import Title from '../games/Title';
 import UpdateGame from '../admin/UpdateGame';
 import Button from 'react-bootstrap/Button';
 import AdminBar from "../admin/AdminBar";
+import PlayerList from '../admin/PlayerList';
+import { useKeycloak } from '@react-keycloak/web';
 
 function GameDetails(props) {    
     const id = props.match.params.id;
@@ -20,18 +23,25 @@ function GameDetails(props) {
     const [registered, setRegistered] = useState(false);
     const [biteCode, setBiteCode] = useState('');
     const [showEditView, setShowEditView] = useState(false);
+    const { keycloak } = useKeycloak();
 
     useEffect(() => {
         dispatch(getGame(id));
-    }, [id, dispatch])
+        dispatch(getLoggedPlayer(id, keycloak.token))
+    }, [id, dispatch, keycloak.token])
+
+    useEffect(() => {
+        if (player.id !== -1) {
+            setRegistered(true);
+        } else {
+            setRegistered(false)
+        }
+    }, [player])
 
     const handleRegistration = (event) => {
         event.preventDefault();
         setRegistered(true);
-        const newPlayer = {
-            game_id: game.id
-        };
-        dispatch(addPlayerToGame(game.id, newPlayer));
+        dispatch(addPlayerToGame(game.id, keycloak.token));
     }
 
     const handleBiteCodeChange = (event) => {
@@ -61,7 +71,7 @@ function GameDetails(props) {
                     <UpdateGame game={game} hideForm={hideForm}/> }
                 </div>
                 <div className="grid-item item2">
-                    {registered && <div>
+                    {(registered || user.isAdmin) && <div>
                         <h3>Game state</h3>
                         <p>{game.gameState}</p>
                         <h3>Chat</h3>
@@ -73,9 +83,7 @@ function GameDetails(props) {
                     <Button variant="info" onClick={handleRegistration}>Join</Button>}
                     {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}    
                 </div>
-                : <div>
-                    <p>player list</p>
-                </div> }  
+                : <PlayerList gameId={id}/> }  
                 <div className="grid-item item4">
                     <h3>Location</h3>
                     <Map />

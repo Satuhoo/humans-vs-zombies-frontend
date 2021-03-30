@@ -6,13 +6,11 @@ const initialState = {
 export function gameReducer(state = initialState, action) {
     switch(action.type) {
         case 'GET_GAMES':
-            console.log('state', action)
             return {
                 ...state,
                 games: action.games,
             }
         case 'GET_GAME':
-            console.log('state', action)
             return {
                 ...state,
                 game: action.game

@@ -1,14 +1,23 @@
 const initialState = {
-    player: {}
+    player: {},
+    players: []
 }
 
 export function playerReducer(state = initialState, action) {
     switch(action.type) {
         case 'ADD_PLAYER':
-            console.log('action', action)
-            console.log('state', {...state})
             return {
                 ...state,
+                player: action.player
+            }
+        case 'GET_PLAYERS':
+            return {
+                ...state,
+                players: action.players
+            }
+        case 'GET_LOGGED_PLAYER':
+             return {
+                 ...state,
                 player: action.player
             }
         default:

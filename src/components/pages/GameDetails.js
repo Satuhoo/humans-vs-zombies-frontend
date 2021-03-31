@@ -5,7 +5,7 @@ import { addPlayerToGame } from '../../store/actions/playerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
 import Map from '../map/Map';
-import Chat from '../chat/Chat';
+import ChatBox from '../chat/ChatBox';
 import BiteCodeForm from '../forms/BiteCodeForm';
 import Title from '../games/Title';
 import UpdateGame from '../admin/UpdateGame';
@@ -73,9 +73,8 @@ function GameDetails(props) {
                 <div className="grid-item item2">
                     {(registered || user.isAdmin) && <div>
                         <h3>Game state</h3>
-                        <p>{game.gameState}</p>
-                        <h3>Chat</h3>
-                        <Chat />
+                        <p>{game.gameState}</p>                        
+                        <ChatBox gameId={id} playerId={player.id} player={player}/>
                     </div>}
                 </div>
                 {!user.isAdmin ? <div className="grid-item item3">

@@ -76,3 +76,9 @@
         margin: 10px 40px 10px 40px;
     }
 }
+
+#message{
+    border-bottom: 1px solid red; 
+    border-color:cornflowerblue;
+    padding: 10px; 
+}

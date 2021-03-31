@@ -11,6 +11,8 @@ import '../styles/GameList.css';
 
 function GameList() {
     const [showAddGameButton, setShowAddGameButton] = useState(true);
+    const [currentLatitude, setCurrentLatitude] = useState(0);
+    const [currentLongitude, setCurrentLongitude] = useState(0);
     const history = useHistory();
     const games = useSelector(state => state.gameReducer.games);
     const user = useSelector(state => state.user);
@@ -20,6 +22,13 @@ function GameList() {
     useEffect(() => {
         dispatch(getGames());
     }, [dispatch])
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            setCurrentLatitude(position.coords.latitude);
+            setCurrentLongitude(position.coords.longitude);
+        })
+    }, [])
 
     const handleClickGame = (game) => {
         history.push(`/games/${game.id}`)
@@ -45,7 +54,7 @@ function GameList() {
                 {!keycloak.authenticated && <p>Please <Link className="link" to="/login">Login</Link></p>}
                 {user.isAdmin && <div>
                     {showAddGameButton ? <Button variant="info" onClick={handleClickAddGame}>Add game</Button>:
-                    <AddGame hideForm={hideForm} /> }
+                    <AddGame hideForm={hideForm} latitude={currentLatitude} longitude={currentLongitude} /> }
                 </div> }
             </div>
         </div>

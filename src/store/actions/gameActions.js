@@ -61,3 +61,8 @@ export const deleteGameById = (id) => {
         })
     }
 }
+
+export const setGameCoordinates = (coordinates) => ({
+    type: 'SET_COORDINATES',
+    coordinates: coordinates
+})

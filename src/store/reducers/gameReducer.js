@@ -30,6 +30,11 @@ export function gameReducer(state = initialState, action) {
                 ...state,
                 games: state.games.filter(i => i.id !== action.payload)
             }
+        case 'SET_COORDINATES':
+            return {
+                ...state,
+                coordinates: action.coordinates
+            }
         default:
             return state
     }

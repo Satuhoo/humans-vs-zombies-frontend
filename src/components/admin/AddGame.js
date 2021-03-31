@@ -1,26 +1,22 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import GameForm from '../forms/GameForm';
 import { createGame } from '../../store/actions/gameActions';
 import defaultRules from '../games/defaultRules';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
+import { Alert } from 'react-bootstrap';
+import { setGameCoordinates } from '../../store/actions/gameActions';
+import '../styles/GameList.css';
 
-function AddGame({hideForm}) {
+function AddGame({hideForm, latitude, longitude}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [rules, setRules] = useState(defaultRules);
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
+    const [showAlert, setShowAlert] = useState(false);
+    const coordinates = useSelector(state => state.gameReducer.coordinates);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            setLatitude(position.coords.latitude);
-            setLongitude(position.coords.longitude);
-        });
-    }, [])
     
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -36,18 +32,24 @@ function AddGame({hideForm}) {
 
     const addGame = (event) => {
         event.preventDefault();
-        const newGame = {
-            name,
-            description,
-            rules,
-            players: [],
-            kills: [],
-            chat: null,
-            latitude,
-            longitude
+        if (name === '' || description === '' || rules === '' || coordinates === undefined) {
+            setShowAlert(true);
+        } else {
+            const newGame = {
+                name,
+                description,
+                rules,
+                players: [],
+                kills: [],
+                chat: null,
+                latitude: coordinates.lat,
+                longitude: coordinates.lng
+            }
+            dispatch(createGame(newGame));
+            hideForm();
+            setShowAlert(false);
+            dispatch(setGameCoordinates(undefined));
         }
-        dispatch(createGame(newGame));
-        hideForm();
     }
 
     return (
@@ -55,9 +57,12 @@ function AddGame({hideForm}) {
             <Button variant="info" size="sm" onClick={hideForm}>
                 <FontAwesomeIcon  className="icon" icon={faAngleLeft}/>
             </Button>
+            {showAlert && <Alert className="add-game-alert" variant="danger">
+                Something is missing! Please check game details and try again.
+            </Alert>}
             <GameForm name={name} description={description} rules={rules} handleNameChange={handleNameChange} 
                 handleDescriptionChange={handleDescriptionChange} handleRulesChange={handleRulesChange}
-                onSubmit={addGame} buttonText="Create game"/>
+                onSubmit={addGame} buttonText="Create game" latitude={latitude} longitude={longitude}/>
         </div>
     )
 }

@@ -73,18 +73,21 @@ function GameDetails(props) {
                 <div className="grid-item item2">
                     {(registered || user.isAdmin) && <div>
                         <h3>Game state</h3>
-                        <p>{game.gameState}</p>                        
-                        <ChatBox gameId={id} playerId={player.id} player={player}/>
+                        <p>{game.gameState}</p> 
+                         <ChatBox gameId={id} playerId={player.id} player={player}/>                         
                     </div>}
                 </div>
                 {!user.isAdmin ? <div className="grid-item item3">
                     {registered ? <p><br></br>Player id {player.id}</p>: 
                     <Button variant="info" onClick={handleRegistration}>Join</Button>}
-                    {registered && !showEditView && <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}    
+                    {registered && !showEditView &&
+                     <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>
+                     }    
                 </div>
                 : <PlayerList gameId={id}/> }  
                 <div className="grid-item item4">
                     <h3>Location</h3>
+                    
                     <Map />
                 </div>
             </div>

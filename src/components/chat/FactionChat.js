@@ -17,35 +17,31 @@ function FactionChat(props) {
         dispatch(getChat(props.gameId, keycloak.token));        
     }, [props.gameId, props.playerId, dispatch, keycloak])
 
-
-
     const handleMessageChange = (event) => {
         setNewMessage(event.target.value);        
     }
-
+    
     const addMessage = (event) => {
         event.preventDefault();        
         const chatMessage = {
           "content" : newMessage,          
           "globalChat" : false                                    
         }
-        dispatch(submitMessage(props.gameId, chatMessage, keycloak.token)); 
-        
+        dispatch(submitMessage(props.gameId, chatMessage, keycloak.token));         
     }
 
-return (
+    return (
 
-    <div className="chat">        
-        <div>  
-            {messages.map(message => <div key={message.id}  id = "message">{message.content}</div>)}
-         </div>
-        <div>
-            <MessageForm gameId = {props.gameId} playerId = {props.playerId}
-            newMessage = {newMessage} onSubmit={addMessage} 
-            handleMessageChange = {handleMessageChange}></MessageForm>
-        </div>
-    </div>
-    
+        <div className="chatBox">     
+            <div>
+                <MessageForm gameId = {props.gameId} playerId = {props.playerId}
+                newMessage = {newMessage} onSubmit={addMessage} 
+                handleMessageChange = {handleMessageChange}></MessageForm>
+            </div>      
+            <div>  
+                {messages.map(message => <div key={message.id}  id = "message">{message.content}</div>)}
+            </div>      
+        </div>   
     )
 }
 

@@ -78,7 +78,28 @@
 }
 
 #message{
-    border-bottom: 1px solid red; 
+    border-bottom: 1px solid; 
     border-color:cornflowerblue;
     padding: 10px; 
 }
+
+.leaflet-div-icon {
+    /* leaflet marker css */
+}  
+  #messageButton{
+     margin-top: 20px;      
+     margin-bottom: 20px; 
+     text-align: center;  
+   
+  }
+
+  #messageInput{
+    margin-top: 20px;     
+ }
+
+ .chatBox{
+    max-height: 60vh;
+    overflow: auto; 
+    display: flex;
+    flex-direction: column-reverse;   
+ }

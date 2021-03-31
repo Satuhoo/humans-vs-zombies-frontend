@@ -8,7 +8,9 @@ export const getChat = (id, jwtStr) => {
                 type: 'GET_CHAT',
                 messages: response.data
             })
-        })
+        }).catch(err => {
+            console.log("faction chat err")
+        });
     };    
 }
 
@@ -45,7 +47,9 @@ export const getGlobalChat = id => {
                 type: 'GET_GLOBAL_CHAT',
                 globalMessages: response.data
             })
-        })
+        }).catch (err => {
+            console.log("global chat err")
+        });
     };    
 }
 

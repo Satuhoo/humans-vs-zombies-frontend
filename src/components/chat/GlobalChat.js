@@ -17,8 +17,6 @@ function GlobalChat(props) {
         dispatch(getGlobalChat(props.gameId));              
     }, [props.gameId, props.playerId, dispatch])
 
-
-
     const handleMessageChange = (event) => {
         setNewMessage(event.target.value);        
     }
@@ -30,23 +28,19 @@ function GlobalChat(props) {
           "globalChat" : true                                              
         }
         dispatch(submitGlobalMessage(props.gameId, chatMessage, keycloak.token)); 
-        
     }
 
-return (
-
-    <div className="chat">       
-        <div>            
-            {globalMessages.map(globalMessage => <div key={globalMessage.id}  id = "message">{globalMessage.content}</div>)}
-            </div>
-        
-        <div>
-            <MessageForm gameId = {props.gameId} playerId = {props.playerId}
-            newMessage = {newMessage} onSubmit={addMessage} 
-            handleMessageChange = {handleMessageChange}></MessageForm>
-        </div>
-    </div>
-    
+    return (
+        <div className="chatBox">    
+            <div>
+                <MessageForm gameId = {props.gameId} playerId = {props.playerId}
+                newMessage = {newMessage} onSubmit={addMessage} 
+                handleMessageChange = {handleMessageChange}></MessageForm>
+            </div>   
+            <div>            
+                {globalMessages.map(globalMessage => <div key={globalMessage.id}  id = "message">{globalMessage.content}</div>)}
+            </div>       
+        </div>   
     )
 }
 

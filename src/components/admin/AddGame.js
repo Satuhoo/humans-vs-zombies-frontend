@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import GameForm from '../forms/GameForm';
 import { createGame } from '../../store/actions/gameActions';
@@ -11,7 +11,16 @@ function AddGame({hideForm}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [rules, setRules] = useState(defaultRules);
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+        });
+    }, [])
     
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -33,7 +42,9 @@ function AddGame({hideForm}) {
             rules,
             players: [],
             kills: [],
-            chat: null
+            chat: null,
+            latitude,
+            longitude
         }
         dispatch(createGame(newGame));
         hideForm();

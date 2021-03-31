@@ -12,8 +12,9 @@ function PlayerList({gameId}) {
 
     return (
         <div>
+            <h3>Players</h3>
             {players.map((player) => 
-                <p key={player.id}>{player.id} </p>
+                <p key={player.id}>player id: {player.id}</p>
             )}
         </div>
     )

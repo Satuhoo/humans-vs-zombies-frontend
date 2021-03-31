@@ -1,0 +1,25 @@
+.admin-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-list-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    margin: 10px 40px 10px 80px;
+}
+
+.game-card {
+    border: 1px solid black;
+    margin: 20px 30px 5px 0px;
+    box-shadow: 2px 5px 4px #888888;
+    border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+    .game-list-container {
+        display: flex;
+        flex-direction: column;  
+    }
+}

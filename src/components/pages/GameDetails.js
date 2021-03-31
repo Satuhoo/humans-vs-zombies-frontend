@@ -82,9 +82,11 @@ function GameDetails(props) {
                     {registered ? <p><br></br>Player id {player.id}</p>: 
                     <Button variant="info" onClick={handleRegistration}>Join</Button>}
                     {registered && !showEditView && 
-                            player.human 
-                            ? <div>Your bite code is <b>{player.biteCode}</b></div>
-                            : <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>
+                            (
+                                player.human 
+                                ? <div>Your bite code is <b>{player.biteCode}</b></div>
+                                : <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>
+                            )
                     }    
                 </div>
                 : <PlayerList gameId={id}/> }  

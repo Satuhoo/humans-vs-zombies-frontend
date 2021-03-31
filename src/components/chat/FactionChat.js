@@ -29,7 +29,6 @@ function FactionChat(props) {
           "content" : newMessage,          
           "globalChat" : false                                    
         }
-        console.log({messages})
         dispatch(submitMessage(props.gameId, chatMessage, keycloak.token)); 
         
     }

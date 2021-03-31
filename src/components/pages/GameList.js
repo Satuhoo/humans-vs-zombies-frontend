@@ -1,13 +1,21 @@
 import Game from '../games/Game';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getGames } from '../../store/actions/gameActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { useKeycloak } from '@react-keycloak/web';
+import AddGame from '../admin/AddGame';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import '../styles/GameList.css';
 
 function GameList() {
+    const [showAddGameButton, setShowAddGameButton] = useState(true);
     const history = useHistory();
     const games = useSelector(state => state.gameReducer.games);
+    const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const { keycloak } = useKeycloak();
 
     useEffect(() => {
         dispatch(getGames());
@@ -17,12 +25,29 @@ function GameList() {
         history.push(`/games/${game.id}`)
     }
 
+    const handleClickAddGame = () => {
+        setShowAddGameButton(false);
+    }
+
+    const hideForm = () => {
+        setShowAddGameButton(true);
+    }
+
     return (
-        <div>
+        <div className="game-list-container">
+            <div>
             <h1>Games</h1>
             {games.map((game) => 
                 <Game game={game} key={game.id} gameClicked={handleClickGame}/>
             )}
+            </div>
+            <div>
+                {!keycloak.authenticated && <p>Please <Link className="link" to="/login">Login</Link></p>}
+                {user.isAdmin && <div>
+                    {showAddGameButton ? <Button variant="info" onClick={handleClickAddGame}>Add game</Button>:
+                    <AddGame hideForm={hideForm} /> }
+                </div> }
+            </div>
         </div>
     )
 }

@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import GameForm from '../forms/GameForm';
 import { createGame } from '../../store/actions/gameActions';
 import defaultRules from '../games/defaultRules';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import Button from 'react-bootstrap/Button';
 
 function AddGame({hideForm}) {
     const [name, setName] = useState('');
@@ -38,6 +41,9 @@ function AddGame({hideForm}) {
 
     return (
         <div>
+            <Button variant="info" size="sm" onClick={hideForm}>
+                <FontAwesomeIcon  className="icon" icon={faAngleLeft}/>
+            </Button>
             <GameForm name={name} description={description} rules={rules} handleNameChange={handleNameChange} 
                 handleDescriptionChange={handleDescriptionChange} handleRulesChange={handleRulesChange}
                 onSubmit={addGame} buttonText="Create game"/>

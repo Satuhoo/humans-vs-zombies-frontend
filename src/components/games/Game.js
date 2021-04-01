@@ -1,4 +1,5 @@
 import '../styles/GameList.css';
+import GameState from './GameState';
 
 function Game({game, gameClicked}) {
     const handleClickGame = () => {
@@ -7,8 +8,14 @@ function Game({game, gameClicked}) {
 
     return (
         <div className="game-card" onClick={handleClickGame}>
-            <h2>{game.name}</h2>
-            <p>{game.gameState} Players: {game.players.length}</p>
+            <div>
+                <h2>{game.name}</h2>
+                <p>{game.description}</p>
+            </div>
+            <div>
+                <GameState game={game}/>
+                <p> Players: {game.players.length}</p>
+            </div>
         </div>
     )
 }

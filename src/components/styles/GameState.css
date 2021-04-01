@@ -1,0 +1,17 @@
+.game-state-registration {
+    color: green;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.game-state-in-progress {
+    color: orange;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.game-state-complete {
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+}

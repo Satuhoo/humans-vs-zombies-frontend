@@ -13,6 +13,7 @@ import UpdateGame from '../admin/UpdateGame';
 import GameRegistrationForm from '../forms/GameRegistrationForm';
 import AdminBar from "../admin/AdminBar";
 import PlayerList from '../admin/PlayerList';
+import GameState from '../games/GameState';
 import { useKeycloak } from '@react-keycloak/web';
 
 function GameDetails(props) {    
@@ -26,6 +27,7 @@ function GameDetails(props) {
     const [showEditView, setShowEditView] = useState(false);
     const [playerName, setPlayerName] = useState('');
     const [loading, setLoading] = useState(true);
+    const [gameState, setGameState] = useState('');
     const { keycloak } = useKeycloak();
 
     useEffect(() => {
@@ -35,6 +37,7 @@ function GameDetails(props) {
 
     useEffect(() => {
         if (game !== undefined && player !== undefined) {
+            setGameState();
             if (player.id !== -1) {
                 setRegistered(true);
             } else {
@@ -43,6 +46,18 @@ function GameDetails(props) {
             setLoading(false);
         }
     }, [game, player])
+
+    useEffect(() => {
+        if (game !== undefined) {
+            if (game.gameState === 'REGISTRATION') {
+                setGameState('Registration')
+            } else if (game.gameState === 'IN_PROGRESS') {
+                setGameState('In progress')
+            } else {
+                setGameState('Game is finished')
+            }
+        }
+    }, [game, gameState])
 
     if (loading) return null;
 
@@ -96,7 +111,7 @@ function GameDetails(props) {
                 <div className="grid-item item2">
                     {(registered || user.isAdmin) && <div>
                         <h3>Game state</h3>
-                        <p>{game.gameState}</p> 
+                        <GameState game={game}/>
                          <ChatBox gameId={id} playerId={player.id} player={player}/>                         
                     </div>}
                 </div>

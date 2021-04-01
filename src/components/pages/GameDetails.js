@@ -74,6 +74,10 @@ function GameDetails(props) {
         setShowEditView(true);
     }
 
+    const handlePlayerStateChange = player => {
+        console.log(player)
+    }
+
     const hideForm = () => {
         setShowEditView(false);
     }
@@ -107,7 +111,7 @@ function GameDetails(props) {
                             )
                     }    
                 </div>
-                : <PlayerList gameId={id}/> }  
+                : <PlayerList gameId={id} handlePlayerStateChange={handlePlayerStateChange} /> }  
                 <div className="grid-item item4">
                     <h3>Location</h3>
                     <Map />

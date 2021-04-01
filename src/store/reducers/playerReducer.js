@@ -20,6 +20,8 @@ export function playerReducer(state = initialState, action) {
                  ...state,
                 player: action.player
             }
+        case 'KILL_PLAYER':
+            return state
         default:
             return state
     }

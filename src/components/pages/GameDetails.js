@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getGame } from '../../store/actions/gameActions';
 import { getLoggedPlayer } from '../../store/actions/playerActions';
 import { addPlayerToGame } from '../../store/actions/playerActions';
+import { killPlayer } from '../../store/actions/killActions'
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
 import Map from '../map/Map';
@@ -59,7 +60,14 @@ function GameDetails(props) {
 
     const handleBite = (event) => {
         event.preventDefault();
-        console.log('bite');
+
+        const kill = {
+            'biteCode': biteCode,
+            'killerId': player.id
+        }
+
+        dispatch(killPlayer(game.id, kill))
+        setBiteCode('')
     }
 
     const handleClickEdit = () => {
@@ -91,7 +99,12 @@ function GameDetails(props) {
                         <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
                             handleRegistration={handleRegistration} />}
                     {registered && !showEditView && 
-                        <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}    
+                            (
+                                player.human 
+                                ? <div>Your bite code is <b>{player.biteCode}</b></div>
+                                : <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>
+                            )
+                    }    
                 </div>
                 : <PlayerList gameId={id}/> }  
                 <div className="grid-item item4">

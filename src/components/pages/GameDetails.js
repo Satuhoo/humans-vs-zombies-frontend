@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { getGame } from '../../store/actions/gameActions';
 import { getLoggedPlayer } from '../../store/actions/playerActions';
 import { addPlayerToGame } from '../../store/actions/playerActions';
+import { killPlayer } from '../../store/actions/killActions'
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
 import Map from '../map/Map';
-import Chat from '../chat/Chat';
+import ChatBox from '../chat/ChatBox';
 import BiteCodeForm from '../forms/BiteCodeForm';
 import Title from '../games/Title';
 import UpdateGame from '../admin/UpdateGame';
@@ -65,7 +66,14 @@ function GameDetails(props) {
 
     const handleBite = (event) => {
         event.preventDefault();
-        console.log('bite');
+
+        const kill = {
+            'biteCode': biteCode,
+            'killerId': player.id
+        }
+
+        dispatch(killPlayer(game.id, kill))
+        setBiteCode('')
     }
 
     const handleClickEdit = () => {
@@ -88,9 +96,8 @@ function GameDetails(props) {
                 <div className="grid-item item2">
                     {(registered || user.isAdmin) && <div>
                         <h3>Game state</h3>
-                        <p>{game.gameState}</p>
-                        <h3>Chat</h3>
-                        <Chat />
+                        <p>{game.gameState}</p> 
+                         <ChatBox gameId={id} playerId={player.id} player={player}/>                         
                     </div>}
                 </div>
                 {!user.isAdmin ? <div className="grid-item item3">
@@ -98,11 +105,17 @@ function GameDetails(props) {
                         <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
                             handleRegistration={handleRegistration} />}
                     {registered && !showEditView && 
-                        <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}    
+                            (
+                                player.human 
+                                ? <div>Your bite code is <b>{player.biteCode}</b></div>
+                                : <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>
+                            )
+                    }    
                 </div>
                 : <PlayerList gameId={id}/> }  
                 <div className="grid-item item4">
                     <h3>Location</h3>
+                    
                     <Map />
                 </div>
             </div>

@@ -1,8 +1,8 @@
 import playerService from "../../services/player.service";
 
-export const addPlayerToGame = (gameId, jwtStr) => {
+export const addPlayerToGame = (gameId, player ,jwtStr) => {
     return dispatch => {
-        playerService.addPlayer(gameId, jwtStr)
+        playerService.addPlayer(gameId, player ,jwtStr)
         .then(response => {
             dispatch({
                 type: 'ADD_PLAYER',

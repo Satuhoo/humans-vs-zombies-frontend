@@ -17,6 +17,15 @@
     border-radius: 10px;
 }
 
+.form-label {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.add-game-alert {
+    margin-top: 10px;
+}
+
 @media (max-width: 800px) {
     .game-list-container {
         display: flex;

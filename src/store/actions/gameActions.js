@@ -67,6 +67,21 @@ export const setGameCoordinates = (coordinates) => ({
     coordinates: coordinates
 })
 
+<<<<<<< HEAD
 export const clearGame = () => ({
     type: 'CLEAR_GAME'
 })
+=======
+
+export const getKills = (id) => {
+    return dispatch => {
+        gameService.getKillsByGameId(id)
+        .then(response => {
+            dispatch({
+                type: 'GET_KILLS',
+                kills: response.data
+            })
+        })
+    };
+}
+>>>>>>> feat: add template for getting kills from backend

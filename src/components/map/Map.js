@@ -1,7 +1,16 @@
 import { MapContainer, TileLayer } from "react-leaflet";
+import { getKills } from '../../store/actions/gameActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
 
-function Map() {
+function Map(props) {
+    const kills = useSelector(state => state.gameReducer.kills);
+    const dispatch = useDispatch();
     const defaultPosition = [60.454510, 22.264824];
+
+    useEffect(() => {     
+        dispatch(getKills(props.gameId));                        
+  }, [props.gameId, dispatch])
   
     return (
       <div className="leaflet-container">

@@ -31,12 +31,11 @@ function UpdateGame({game, hideForm}) {
     const updateGame = (event) => {
         event.preventDefault();
         const updatedGame = {
-            ...game,
-            name,
-            description,
-            rules,
-            gameState,
-            players: []
+            'id' : game.id,
+            'name' : name,
+            'description' : description,
+            'rules' : rules,
+            'gameState' : gameState   
         }
         dispatch(updateGameById(updatedGame));
         hideForm();

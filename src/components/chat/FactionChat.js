@@ -14,7 +14,7 @@ function FactionChat(props) {
     const [newMessage, setNewMessage] = useState('');
 
     useEffect(() => {              
-        dispatch(getChat(props.gameId, keycloak.token));        
+        dispatch(getChat(props.gameId, keycloak.token));     
     }, [props.gameId, props.playerId, dispatch, keycloak])
 
     const handleMessageChange = (event) => {
@@ -29,6 +29,12 @@ function FactionChat(props) {
         }
         dispatch(submitMessage(props.gameId, chatMessage, keycloak.token));         
     }
+  
+    const formatTimeStamp = (timeStamp) =>{        
+        const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric'};
+        return new Date(timeStamp).toLocaleTimeString('en-GB', options);
+
+    }
 
     return (
 
@@ -39,7 +45,9 @@ function FactionChat(props) {
                 handleMessageChange = {handleMessageChange}></MessageForm>
             </div>      
             <div>  
-                {messages.map(message => <div key={message.id}  id = "message">{message.content}</div>)}
+                {messages.map(message => <div key={message.id}  id = "message"><div id="senderName">{message.senderName}</div> 
+                 <div id="messageContent">{message.content}</div>
+                 <div id="timeStamp">{formatTimeStamp(message.timeStamp)}</div> </div>)}
             </div>      
         </div>   
     )

@@ -20,6 +20,7 @@ function GlobalChat(props) {
     const handleMessageChange = (event) => {
         setNewMessage(event.target.value);        
     }
+    
 
     const addMessage = (event) => {
         event.preventDefault();        
@@ -30,17 +31,24 @@ function GlobalChat(props) {
         dispatch(submitGlobalMessage(props.gameId, chatMessage, keycloak.token)); 
     }
 
+    const formatTimeStamp = (timeStamp) =>{        
+        const options = {  hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric' };
+        return new Date(timeStamp).toLocaleTimeString('en-GB', options);
+    }
+
     return (
-        <div className="chatBox">    
-            <div>
-                <MessageForm gameId = {props.gameId} playerId = {props.playerId}
-                newMessage = {newMessage} onSubmit={addMessage} 
-                handleMessageChange = {handleMessageChange}></MessageForm>
-            </div>   
-            <div>            
-                {globalMessages.map(globalMessage => <div key={globalMessage.id}  id = "message">{globalMessage.content}</div>)}
-            </div>       
-        </div>   
+        <div className="chatBox">     
+        <div>
+            <MessageForm gameId = {props.gameId} playerId = {props.playerId}
+            newMessage = {newMessage} onSubmit={addMessage} 
+            handleMessageChange = {handleMessageChange}></MessageForm>
+        </div>      
+        <div>  
+            {globalMessages.map(message => <div key={message.id}  id = "message"><div id="senderName">{message.senderName}</div> 
+             <div id="messageContent">{message.content}</div>
+             <div id="timeStamp">{formatTimeStamp(message.timeStamp)}</div> </div>)}
+        </div>      
+    </div>   
     )
 }
 

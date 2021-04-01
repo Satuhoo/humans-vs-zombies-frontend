@@ -1,8 +1,8 @@
 import http from '../http-common';
 
 class PlayerService {
-    addPlayer(gameId, jwtStr) {
-        return http.post(`/games/${gameId}/players`, {}, {
+    addPlayer(gameId, player, jwtStr) {
+        return http.post(`/games/${gameId}/players`, player, {
             'headers': {
               'Authorization': 'Bearer ' + jwtStr
             }

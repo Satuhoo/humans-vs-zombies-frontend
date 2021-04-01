@@ -9,7 +9,7 @@ import ChatBox from '../chat/ChatBox';
 import BiteCodeForm from '../forms/BiteCodeForm';
 import Title from '../games/Title';
 import UpdateGame from '../admin/UpdateGame';
-import Button from 'react-bootstrap/Button';
+import GameRegistrationForm from '../forms/GameRegistrationForm';
 import AdminBar from "../admin/AdminBar";
 import PlayerList from '../admin/PlayerList';
 import { useKeycloak } from '@react-keycloak/web';
@@ -23,6 +23,7 @@ function GameDetails(props) {
     const [registered, setRegistered] = useState(false);
     const [biteCode, setBiteCode] = useState('');
     const [showEditView, setShowEditView] = useState(false);
+    const [playerName, setPlayerName] = useState('');
     const { keycloak } = useKeycloak();
 
     useEffect(() => {
@@ -41,11 +42,19 @@ function GameDetails(props) {
     const handleRegistration = (event) => {
         event.preventDefault();
         setRegistered(true);
-        dispatch(addPlayerToGame(game.id, keycloak.token));
+        const newPlayer = {
+            playerName: playerName
+        }
+        dispatch(addPlayerToGame(game.id, newPlayer, keycloak.token));
     }
 
     const handleBiteCodeChange = (event) => {
         setBiteCode(event.target.value);
+    }
+
+    const handlePlayerNameChange = (event) => {
+        console.log(event.target.value)
+        setPlayerName(event.target.value);
     }
 
     const handleBite = (event) => {
@@ -79,10 +88,10 @@ function GameDetails(props) {
                 </div>
                 {!user.isAdmin ? <div className="grid-item item3">
                     {registered ? <p><br></br>Player id {player.id}</p>: 
-                    <Button variant="info" onClick={handleRegistration}>Join</Button>}
-                    {registered && !showEditView &&
-                     <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>
-                     }    
+                        <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
+                            handleRegistration={handleRegistration} />}
+                    {registered && !showEditView && 
+                        <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>}    
                 </div>
                 : <PlayerList gameId={id}/> }  
                 <div className="grid-item item4">

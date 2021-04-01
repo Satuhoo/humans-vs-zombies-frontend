@@ -1,13 +1,14 @@
 import Game from '../games/Game';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getGames } from '../../store/actions/gameActions';
+import { getGames, clearGame } from '../../store/actions/gameActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useKeycloak } from '@react-keycloak/web';
 import AddGame from '../admin/AddGame';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import '../styles/GameList.css';
+import { clearPlayer } from '../../store/actions/playerActions';
 
 function GameList() {
     const [showAddGameButton, setShowAddGameButton] = useState(true);
@@ -21,6 +22,8 @@ function GameList() {
 
     useEffect(() => {
         dispatch(getGames());
+        dispatch(clearPlayer());
+        dispatch(clearGame());
     }, [dispatch])
 
     useEffect(() => {

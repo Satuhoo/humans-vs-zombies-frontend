@@ -66,3 +66,7 @@ export const setGameCoordinates = (coordinates) => ({
     type: 'SET_COORDINATES',
     coordinates: coordinates
 })
+
+export const clearGame = () => ({
+    type: 'CLEAR_GAME'
+})

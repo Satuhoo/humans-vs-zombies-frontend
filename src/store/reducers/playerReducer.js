@@ -1,5 +1,4 @@
 const initialState = {
-    player: {},
     players: []
 }
 
@@ -16,10 +15,15 @@ export function playerReducer(state = initialState, action) {
                 players: action.players
             }
         case 'GET_LOGGED_PLAYER':
-             return {
+            return {
                  ...state,
                 player: action.player
             }
+        case 'CLEAR_PLAYER':
+            return {
+                ...state,
+               player: undefined
+           }
         default:
             return state
     }

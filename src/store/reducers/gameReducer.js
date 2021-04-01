@@ -1,5 +1,4 @@
 const initialState = {
-    game: {},
     games: []
 }
 
@@ -34,6 +33,11 @@ export function gameReducer(state = initialState, action) {
             return {
                 ...state,
                 coordinates: action.coordinates
+            }
+        case 'CLEAR_GAME':
+            return {
+                ...state,
+                game: undefined
             }
         default:
             return state

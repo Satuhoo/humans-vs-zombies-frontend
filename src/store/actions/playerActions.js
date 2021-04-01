@@ -41,3 +41,7 @@ export const getPlayers = (gameId) => {
         })
     }
 }
+
+export const clearPlayer = () => ({
+    type: 'CLEAR_PLAYER'
+})

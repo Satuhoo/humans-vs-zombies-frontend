@@ -24,6 +24,7 @@ function GameDetails(props) {
     const [biteCode, setBiteCode] = useState('');
     const [showEditView, setShowEditView] = useState(false);
     const [playerName, setPlayerName] = useState('');
+    const [loading, setLoading] = useState(true);
     const { keycloak } = useKeycloak();
 
     useEffect(() => {
@@ -32,12 +33,17 @@ function GameDetails(props) {
     }, [id, dispatch, keycloak.token])
 
     useEffect(() => {
-        if (player.id !== -1) {
-            setRegistered(true);
-        } else {
-            setRegistered(false)
+        if (game !== undefined && player !== undefined) {
+            if (player.id !== -1) {
+                setRegistered(true);
+            } else {
+                setRegistered(false);
+            }
+            setLoading(false);
         }
-    }, [player])
+    }, [game, player])
+
+    if (loading) return null;
 
     const handleRegistration = (event) => {
         event.preventDefault();

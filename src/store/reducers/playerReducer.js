@@ -32,7 +32,13 @@ export function playerReducer(state = initialState, action) {
                 )
             }
         case 'KILL_PLAYER':
-            return state
+            return {
+                ...state,
+                player: {
+                    ...state.player,
+                    kills: state.player.kills.concat(action.kill.victim)
+                }
+            }
         default:
             return state
     }

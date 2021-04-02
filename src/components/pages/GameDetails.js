@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getGame } from '../../store/actions/gameActions';
 import { getLoggedPlayer } from '../../store/actions/playerActions';
-import { addPlayerToGame } from '../../store/actions/playerActions';
+import { addPlayerToGame, updatePlayer } from '../../store/actions/playerActions';
 import { killPlayer } from '../../store/actions/killActions'
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
@@ -74,8 +74,21 @@ function GameDetails(props) {
         setShowEditView(true);
     }
 
-    const handlePlayerStateChange = player => {
-        console.log(player)
+    const handlePlayerStateChange = playerItem => {
+        const changedPlayer = {
+            ...playerItem,
+            game: {
+                ...game,
+                players: [],
+                kills: []
+            },
+            messages: [],
+            kills: [],
+            human: !playerItem.human,
+            victimOf: null
+        }
+
+        dispatch(updatePlayer(game.id, changedPlayer))
     }
 
     const hideForm = () => {

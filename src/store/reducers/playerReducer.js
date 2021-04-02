@@ -20,6 +20,13 @@ export function playerReducer(state = initialState, action) {
                  ...state,
                 player: action.player
             }
+        case 'UPDATE_PLAYER':
+            return {
+                ...state,
+                players: state.players.map(player => 
+                    player.id === action.updatedPlayer.id ? action.updatedPlayer : player
+                )
+            }
         case 'KILL_PLAYER':
             return state
         default:

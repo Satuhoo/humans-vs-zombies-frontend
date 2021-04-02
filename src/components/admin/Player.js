@@ -1,17 +1,26 @@
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
 const Player = ({ player, handlePlayerStateChange }) => {
-  const onChangePlayerState = event => {
-    handlePlayerStateChange(player)
+  const [playerItem, setPlayerItem] = useState(null)
+
+  useEffect(() => {
+    setPlayerItem(player)
+  }, [player])
+  
+  const onChangePlayerState = () => {
+    handlePlayerStateChange(playerItem)
   }
 
   return (
-    <p key={player.id}>
-    player id: {player.id} {player.human ? 'Human' : 'Zombie'}
-    <Button onClick={onChangePlayerState}>
-        {player.human ? 'Turn to zombie' : 'Turn to human'}
-    </Button>
-</p>
+    <div>
+      {playerItem && <p>
+        player id: {playerItem.id} {playerItem.human ? 'Human' : 'Zombie'}
+        <Button onClick={onChangePlayerState}>
+            {playerItem.human ? 'Turn into a zombie' : 'Turn into a human'}
+        </Button>
+      </p>}
+    </div>
   )
 }
 

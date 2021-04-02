@@ -43,7 +43,7 @@ export const updateGameById = (game) => {
             dispatch({
                 type: 'UPDATE_GAME',
                 id: game.id,
-                updatedGame: response.data
+                updatedGame: response.data                
             })
         })
     }

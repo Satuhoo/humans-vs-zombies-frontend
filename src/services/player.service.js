@@ -20,6 +20,10 @@ class PlayerService {
     getPlayersByGameId(gameId) {
         return http.get(`/games/${gameId}/players`)
     }
+
+    updatePlayer(gameId, player) {
+        return http.put(`/games/${gameId}/players/${player.id}`, player)
+    }
 }
 
 export default new PlayerService();

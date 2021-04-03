@@ -34,6 +34,22 @@ export function gameReducer(state = initialState, action) {
                 ...state,
                 coordinates: action.coordinates
             }
+        case 'ADD_KILL_TO_GAME':
+            return {
+                ...state,
+                game: {
+                    ...state.game,
+                    kills: state.game.kills.concat(action.kill)
+                },
+                games: state.games.map(game => 
+                    game.id === state.game.id 
+                    ? {
+                        ...game,
+                        kills: game.kills.concat(action.kill)
+                    }
+                    : game
+                )
+            }
         case 'CLEAR_GAME':
             return {
                 ...state,

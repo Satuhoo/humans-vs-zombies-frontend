@@ -45,3 +45,15 @@ export const getPlayers = (gameId) => {
 export const clearPlayer = () => ({
     type: 'CLEAR_PLAYER'
 })
+
+export const updatePlayer = (gameId, player) => {
+    return dispatch => {
+        playerService.updatePlayer(gameId, player)
+        .then(response => {
+            dispatch({
+                type: 'UPDATE_PLAYER',
+                updatedPlayer: response.data
+            })
+        })
+    }
+}

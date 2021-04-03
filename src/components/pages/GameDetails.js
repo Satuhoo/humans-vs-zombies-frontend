@@ -112,7 +112,7 @@ function GameDetails(props) {
                     {(registered || user.isAdmin) && <div>
                         <h3>Game state</h3>
                         <GameState game={game}/>
-                         <ChatBox gameId={id} playerId={player.id} player={player}/>                         
+                         <ChatBox/>                         
                     </div>}
                 </div>
                 {!user.isAdmin ? <div className="grid-item item3">

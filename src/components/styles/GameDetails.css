@@ -78,28 +78,68 @@
 }
 
 #message{
-    border-bottom: 1px solid; 
-    border-color:cornflowerblue;
-    padding: 10px; 
+   
 }
 
-.leaflet-div-icon {
-    /* leaflet marker css */
-}  
-  #messageButton{
+#messageButton{
      margin-top: 20px;      
      margin-bottom: 20px; 
      text-align: center;  
    
-  }
+}
 
-  #messageInput{
+#messageInput{
     margin-top: 20px;     
- }
+}
 
- .chatBox{
-    max-height: 60vh;
+.chatBox{
+    white-space: pre; /* CSS2 */
+    white-space: -moz-pre-wrap; /* Mozilla */
+    white-space: -hp-pre-wrap; /* HP printers */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: pre-wrap; /* CSS 2.1 */
+    white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+    word-wrap: break-word; /* IE */
+    max-width: 40vh;
+    max-height: 50vh;
     overflow: auto; 
     display: flex;
-    flex-direction: column-reverse;   
- }
+    flex-direction: column-reverse;  
+   
+}
+
+.loggedPlayer{
+    border: 1px solid; 
+    border-color:cornflowerblue;
+    border-radius: 6px;
+    padding:10px; 
+    background-color: cornflowerblue;
+    color: white;
+    margin-right: 30px;
+    font-size: 15px;
+}
+
+.notLoggedPlayer{
+    border: 1px solid; 
+    border-color:darkseagreen;
+    border-radius: 6px;
+    padding:10px; 
+    background-color:darkseagreen;
+    color: white;
+    margin-right: 30px;
+}
+
+#senderName{
+    display: inline;
+    text-transform: capitalize;
+    font-weight: bold;
+
+}
+
+#senderAndTime{
+    padding-top: 20px;
+    padding-bottom: 5px;
+    font-size: 0.8em;
+}
+

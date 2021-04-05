@@ -17,9 +17,11 @@ function UpdateGameState({game}) {
                 label: 'Yes',
                 onClick: () => {
                     const updatedGame = {
-                        ...game,
-                        gameState: 'IN_PROGRESS',
-                        players: []
+                      'id' : game.id,
+                      'name' : game.name,
+                      'description' : game.description,
+                      'rules' : game.rules,
+                      'gameState' : 'IN_PROGRESS' 
                     }
                     dispatch(updateGameById(updatedGame)); 
                 }
@@ -41,9 +43,11 @@ function UpdateGameState({game}) {
                 label: 'Yes',
                 onClick: () => {
                     const updatedGame = {
-                        ...game,
-                        gameState: 'COMPLETE',
-                        players: []
+                      'id' : game.id,
+                      'name' : game.name,
+                      'description' : game.description,
+                      'rules' : game.rules,
+                      'gameState': 'COMPLETE'
                     }
                     dispatch(updateGameById(updatedGame));
                 }

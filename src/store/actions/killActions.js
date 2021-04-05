@@ -15,3 +15,15 @@ export const killPlayer = (gameId, kill) => {
       })
   }
 }
+
+export const getAllKills = (gameId) => {
+  return dispatch => {
+    killService.getAllKillsByGameId(gameId)
+    .then(response => {
+      dispatch({
+        type: 'GET_ALL_KILLS',
+        kills: response.data
+      })
+    })
+  }
+}

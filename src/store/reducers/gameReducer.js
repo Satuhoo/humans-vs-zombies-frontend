@@ -50,6 +50,11 @@ export function gameReducer(state = initialState, action) {
                     : game
                 )
             }
+        case 'GET_ALL_KILLS':
+            return {
+                ...state,
+                kills: action.kills
+            }
         case 'CLEAR_GAME':
             return {
                 ...state,

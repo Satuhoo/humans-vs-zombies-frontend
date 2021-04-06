@@ -1,5 +1,6 @@
 import '../styles/GameState.css';
 
+//Checks the game state and return customized text for it
 function GameState({game}){
     if (game.gameState === 'REGISTRATION') {
         return (

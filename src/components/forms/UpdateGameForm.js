@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Col } from 'react-bootstrap';
 
+//Shows the input fields with previous values, sets maximum lengths for them
 function UpdateGameForm(props) {
     return (
         <Form onSubmit={props.onSubmit}>

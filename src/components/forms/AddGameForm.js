@@ -3,17 +3,19 @@ import Button from 'react-bootstrap/Button';
 import AdminMap from '../map/AdminMap';
 import '../styles/GameList.css';
 
-function GameForm(props) {
+//Shows the input fields and map to help to the setting coordinates. 
+//Sets maximum lengths for values
+function AddGameForm(props) {
     return (
         <div>
             <Form onSubmit={props.onSubmit}>
                 <Form.Label className="form-label">Name</Form.Label>
-                <Form.Control value={props.name} onChange={props.handleNameChange} />
+                <Form.Control value={props.name} onChange={props.handleNameChange} maxLength={30}/>
                 <Form.Label size="lg">Description</Form.Label>
-                <Form.Control as="textarea" rows={3} value={props.description} 
+                <Form.Control as="textarea" rows={3} maxLength={255} value={props.description} 
                         onChange={props.handleDescriptionChange} />
                 <Form.Label size="lg">Rules</Form.Label>
-                <Form.Control as="textarea" rows={5}  value={props.rules} 
+                <Form.Control as="textarea" rows={5} maxLength={255} value={props.rules} 
                         onChange={props.handleRulesChange} />
                 <Form.Label size="lg">Location</Form.Label>
                 <p>Choose the game location by clicking the map</p>
@@ -25,4 +27,4 @@ function GameForm(props) {
     )
 }
 
-export default GameForm;
+export default AddGameForm;

@@ -1,6 +1,5 @@
 import http from '../http-common';
 
-
 class ChatService {
     getChatMessages(gameId, jwtStr) {
         return http.get(`/games/${gameId}/chat/`, {

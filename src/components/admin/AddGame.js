@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GameForm from '../forms/GameForm';
+import AddGameForm from '../forms/AddGameForm';
 import { createGame } from '../../store/actions/gameActions';
 import defaultRules from '../games/defaultRules';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,6 +32,7 @@ function AddGame({hideForm, latitude, longitude}) {
 
     const addGame = (event) => {
         event.preventDefault();
+        //Checks entered values and shows alert if there is empty fields
         if (name === '' || description === '' || rules === '' || coordinates === undefined) {
             setShowAlert(true);
         } else {
@@ -48,6 +49,7 @@ function AddGame({hideForm, latitude, longitude}) {
             dispatch(createGame(newGame));
             hideForm();
             setShowAlert(false);
+            //Sets coordinates back to undefined, so location have to set again if adding another game
             dispatch(setGameCoordinates(undefined));
         }
     }
@@ -60,7 +62,7 @@ function AddGame({hideForm, latitude, longitude}) {
             {showAlert && <Alert className="add-game-alert" variant="danger">
                 Something is missing! Please check game details and try again.
             </Alert>}
-            <GameForm name={name} description={description} rules={rules} handleNameChange={handleNameChange} 
+            <AddGameForm name={name} description={description} rules={rules} handleNameChange={handleNameChange} 
                 handleDescriptionChange={handleDescriptionChange} handleRulesChange={handleRulesChange}
                 onSubmit={addGame} buttonText="Create game" latitude={latitude} longitude={longitude}/>
         </div>

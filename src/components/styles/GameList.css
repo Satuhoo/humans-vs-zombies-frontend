@@ -31,6 +31,10 @@
     margin-top: 10px;
 }
 
+.info-text {
+    margin-top: 50px;
+}
+
 @media (max-width: 800px) {
     .game-list-container {
         display: flex;

@@ -9,8 +9,10 @@ import { useKeycloak } from '@react-keycloak/web';
 import { useDispatch } from 'react-redux';
 import { login } from '../src/store/actions/userActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
 
-export const App = () => {
+const App = () => {
+  const [userName, setUserName] = useState('');
   const { keycloak, initialized } = useKeycloak();
   const dispatch = useDispatch();
 
@@ -18,8 +20,13 @@ export const App = () => {
     return <h4>Loading...</h4>; 
   }
 
+  //Checks if the user is logged in, fetchs the user data from the keycloak and send it to the redux
   if (keycloak.authenticated){
-    dispatch(login(keycloak.subject, keycloak.hasRealmRole('admin')))
+    keycloak.loadUserInfo()
+      .then(currentUser => {
+        setUserName(currentUser.given_name)
+      })
+      .then(dispatch(login(keycloak.subject, keycloak.hasRealmRole('admin'), userName)))
   }
 
   return (    

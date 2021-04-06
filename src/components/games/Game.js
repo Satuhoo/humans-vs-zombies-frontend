@@ -2,6 +2,7 @@ import '../styles/GameList.css';
 import GameState from './GameState';
 
 function Game({game, gameClicked}) {
+    //Calls the method in the game list component when game is clicked
     const handleClickGame = () => {
         gameClicked(game)
     }

@@ -7,7 +7,6 @@ import { useKeycloak } from '@react-keycloak/web';
 import SockJsClient from 'react-stomp';
 import AddGame from '../admin/AddGame';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import '../styles/GameList.css';
 import { clearPlayer } from '../../store/actions/playerActions';
 
@@ -21,12 +20,16 @@ function GameList() {
     const dispatch = useDispatch();
     const { keycloak } = useKeycloak();
 
+    //Calls the redux actions which fetch all games
+    //Clears the player and the game from the redux, so it's not holding previous 
+    //values if navigating between multiple game details pages
     useEffect(() => {
         dispatch(getGames());
         dispatch(clearPlayer());
         dispatch(clearGame());
     }, [dispatch])
 
+    //Checks the current location of the user
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function(position) {
             setCurrentLatitude(position.coords.latitude);
@@ -34,14 +37,17 @@ function GameList() {
         })
     }, [])
 
+    //When game is clicked, navigates to the game details page by the game id
     const handleClickGame = (game) => {
         history.push(`/games/${game.id}`)
     }
 
+    //Hides the add game button and opens the form 
     const handleClickAddGame = () => {
         setShowAddGameButton(false);
     }
 
+    //Hides the form and shows the add game button
     const hideForm = () => {
         setShowAddGameButton(true);
     }
@@ -64,7 +70,10 @@ function GameList() {
                 )}
                 </div>
                 <div>
-                    {!keycloak.authenticated && <p>Please <Link className="link" to="/login">Login</Link></p>}
+                    {!keycloak.authenticated ? <p className="info-text">Log in to see more game details and play</p>:
+                        <div className="info-text">
+                            <p>Hello {user.name}!</p>
+                        </div>}
                     {user.isAdmin && <div>
                         {showAddGameButton ? <Button variant="info" onClick={handleClickAddGame}>Add game</Button>:
                         <AddGame hideForm={hideForm} latitude={currentLatitude} longitude={currentLongitude} /> }

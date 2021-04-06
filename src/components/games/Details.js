@@ -1,4 +1,4 @@
-function Title({game}) {
+function Details({game}) {
     return (
         <div className="game-details-container">
             <div>
@@ -15,4 +15,4 @@ function Title({game}) {
     )
 }
 
-export default Title;
+export default Details;

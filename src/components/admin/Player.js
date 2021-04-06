@@ -14,12 +14,17 @@ const Player = ({ player, handlePlayerStateChange }) => {
 
   return (
     <div>
-      {playerItem && <p>
-        player id: {playerItem.id} {playerItem.human ? 'Human' : 'Zombie'}
-        <Button onClick={onChangePlayerState}>
-            {playerItem.human ? 'Turn into a zombie' : 'Turn into a human'}
-        </Button>
-      </p>}
+      {playerItem && 
+        <div className="player-item">
+          <div>
+            <p>Player <strong>{playerItem.playerName}</strong>:  {playerItem.human ? 'human' : 'zombie'}</p>
+          </div>
+          <div>
+            <Button variant="info" size="sm" onClick={onChangePlayerState}>
+                {playerItem.human ? 'Turn into a zombie' : 'Turn into a human'}
+            </Button>
+          </div>
+        </div>}
     </div>
   )
 }

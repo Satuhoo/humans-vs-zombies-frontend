@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MapMarker from "./MapMarker";
 
 function Map(props) {
-  
-    console.log(props.game);    
+         
     const dispatch = useDispatch();
     const kills = useSelector(state => state.gameReducer.kills);
 

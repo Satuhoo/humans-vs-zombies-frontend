@@ -75,13 +75,16 @@ function GameDetails(props) {
     //Creates new kill object and sends it to the redux actions
     const handleBite = (event) => {
         event.preventDefault();
-        const kill = {
-            'biteCode': biteCode,
-            'killerId': player.id
-        }
-
-        dispatch(killPlayer(game.id, kill))
-        setBiteCode('')
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const kill = {
+                'biteCode': biteCode,
+                'killerId': player.id,
+                'lat': position.coords.latitude,
+                'lng': position.coords.longitude
+            }
+            dispatch(killPlayer(game.id, kill))
+            setBiteCode('')
+        })
     }
 
     //When edit button is clicked sets the helper variable to true to shown the update game view

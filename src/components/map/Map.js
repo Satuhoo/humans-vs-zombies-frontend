@@ -12,7 +12,7 @@ function Map(props) {
 
     useEffect(() => {
       dispatch(getKills(props.game.id));      
-  }, [props.game.id, dispatch])
+  }, [props.game.id, dispatch, kills])
 
     return (
       <div className="leaflet-container">

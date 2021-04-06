@@ -43,7 +43,7 @@ export const updateGameById = (game) => {
             dispatch({
                 type: 'UPDATE_GAME',
                 id: game.id,
-                updatedGame: response.data
+                updatedGame: response.data                
             })
         })
     }
@@ -70,3 +70,15 @@ export const setGameCoordinates = (coordinates) => ({
 export const clearGame = () => ({
     type: 'CLEAR_GAME'
 })
+
+export const getKills = (id) => {
+    return dispatch => {
+        gameService.getKillsByGameId(id)
+        .then(response => {
+            dispatch({
+                type: 'GET_KILLS',
+                kills: response.data
+            })
+        })
+    };
+}

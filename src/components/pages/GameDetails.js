@@ -153,7 +153,7 @@ function GameDetails(props) {
                     : <PlayerList gameId={id} handlePlayerStateChange={handlePlayerStateChange} /> }  
                     <div className="grid-item item4">
                         <h3>Location</h3>
-                        <Map />
+                        <Map game={game}/>
                     </div>
                 </div>
             </div>

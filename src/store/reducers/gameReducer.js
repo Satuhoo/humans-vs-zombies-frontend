@@ -1,5 +1,7 @@
 const initialState = {
-    games: []
+    game: {},
+    games: [],
+    kills: []    
 }
 
 export function gameReducer(state = initialState, action) {
@@ -34,6 +36,13 @@ export function gameReducer(state = initialState, action) {
                 ...state,
                 coordinates: action.coordinates
             }
+
+        case 'GET_KILLS':
+            return{
+                ...state,
+                kills: action.kills
+            }
+            
         case 'ADD_KILL_TO_GAME':
             return {
                 ...state,

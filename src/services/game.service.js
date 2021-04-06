@@ -20,6 +20,10 @@ class GameService {
     deleteGame(id) {
         return http.delete(`/games/${id}`)
     }
+
+    getKillsByGameId (id){
+        return http.get(`/games/${id}/kills`)
+    }
 }
 
 export default new GameService();

@@ -6,8 +6,8 @@ import { updateGameById } from '../../store/actions/gameActions';
 function UpdateGame({game, hideForm}) {
     const [name, setName] = useState(game.name);
     const [description, setDescription] = useState(game.description);
-    const [rules, setRules] = useState(game.rules);
-    const [gameState, setGameState] = useState(game.gameState);
+    const [rules, setRules] = useState(game.rules);    
+    const [gameState, setGameState] = useState(game.gameState);   
     const dispatch = useDispatch();
     
     const handleNameChange = (event) => {
@@ -27,14 +27,14 @@ function UpdateGame({game, hideForm}) {
     }
 
     const updateGame = (event) => {
-        event.preventDefault();
-        const updatedGame = {
+        event.preventDefault();      
+        const updatedGame = {  
             'id' : game.id,
             'name' : name,
             'description' : description,
             'rules' : rules,
-            'gameState' : gameState   
-        }
+            'gameState' : gameState,          
+        }        
         dispatch(updateGameById(updatedGame));
         hideForm();
     }

@@ -9,8 +9,7 @@ function HumanZombieChat(props) {
     const { keycloak } = useKeycloak();
     const dispatch = useDispatch();
     const messages = useSelector(state => state.chatReducer.messages)   
-    console.log(messages) 
-
+    
     useEffect(() => {              
         dispatch(getChat(props.gameId, keycloak.token));     
     }, [props.gameId, props.playerId, dispatch, keycloak])

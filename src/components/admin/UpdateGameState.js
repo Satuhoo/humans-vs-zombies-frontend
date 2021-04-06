@@ -1,11 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateGameById } from '../../store/actions/gameActions';
 import Button from 'react-bootstrap/Button';
 import { confirmAlert } from 'react-confirm-alert';
 import '../styles/Alert.css';
+import { updatePlayer } from '../../store/actions/playerActions';
 
 function UpdateGameState({game}) {
     const dispatch = useDispatch();
+    const players = useSelector(state => state.playerReducer.players)
+
+    const patientZero = players[Math.floor(Math.random() * players.length)];
 
     const startGame = (event) => {
         event.preventDefault();
@@ -25,6 +29,21 @@ function UpdateGameState({game}) {
                       'gameState' : 'IN_PROGRESS' 
                     }
                     dispatch(updateGameById(updatedGame)); 
+                    const updatePatientZero = {
+                      ...patientZero,
+                      game: {
+                          ...game,
+                          players: [],
+                          kills: [],
+                          chat: null
+                      },
+                      messages: [],
+                      kills: [],
+                      human: false,
+                      patientZero: true,
+                      victimOf: null
+                    }
+                    dispatch(updatePlayer(game.id, updatePatientZero));
                 }
               },
               {

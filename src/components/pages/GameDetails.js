@@ -4,6 +4,7 @@ import { getLoggedPlayer } from '../../store/actions/playerActions';
 import { addPlayerToGame, updatePlayer } from '../../store/actions/playerActions';
 import { killPlayer } from '../../store/actions/killActions'
 import { useDispatch, useSelector } from 'react-redux';
+import SockJsClient from 'react-stomp';
 import '../styles/GameDetails.css';
 import Map from '../map/Map';
 import ChatBox from '../chat/ChatBox';
@@ -113,13 +114,39 @@ function GameDetails(props) {
         setShowEditView(false);
     }
 
+    const onReceiveMessage = gameId => {
+        if (String(gameId) === id) {
+            dispatch(getGame(id))
+            dispatch(getLoggedPlayer(id, keycloak.token))
+            dispatch(getPlayers(id))
+        }
+    }
+
     if (game.gameState === 'COMPLETE') {
         return (
-            <CompletedGame game={game} players={players} user={user}/>
+            <div>
+                <SockJsClient url='http://localhost:8080/ws' 
+                    topics={[
+                        "/topic/deleteGame"
+                    ]}
+                    onMessage={ gameId => onReceiveMessage(gameId) }
+                />
+                <CompletedGame game={game} players={players} user={user}/>
+            </div>
         )
     } else {
         return (
             <div>
+                <SockJsClient url='http://localhost:8080/ws' 
+                    topics={[
+                        "/topic/updateGame",
+                        "/topic/deleteGame",
+                        "/topic/addPlayer",
+                        "/topic/updatePlayer",
+                        "/topic/deletePlayer"
+                    ]}
+                    onMessage={ gameId => onReceiveMessage(gameId) }
+                />
                 {/* Shows the admin bar for the user's with admin role */}
                 {user.isAdmin && <AdminBar game={game} hideForm={hideForm} showEditView={showEditView}
                     handleClickEdit={handleClickEdit} /> }

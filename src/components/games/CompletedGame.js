@@ -15,7 +15,7 @@ function CompletedGame({game, user}) {
                     <h2>{game.name}</h2>
                 </div>
                 <div>
-                    <Map />
+                    <Map game={game}/>
                 </div>
                 <div>
                     <h3>Game state</h3>

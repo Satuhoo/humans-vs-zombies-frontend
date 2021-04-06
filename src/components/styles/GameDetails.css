@@ -127,6 +127,28 @@
     font-size: 15px;
 }
 
+.humanMessage{
+    border: 1px solid; 
+    border-color:rgb(31, 109, 255);
+    border-radius: 6px;
+    padding:10px; 
+    background-color: rgb(31, 109, 255);
+    color: white;
+    margin-right: 30px;
+    font-size: 15px;
+}
+
+.zombieMessage{
+    border: 1px solid; 
+    border-color:rgb(252, 105, 105);
+    border-radius: 6px;
+    padding:10px; 
+    background-color: rgb(252, 105, 105);
+    color: white;
+    margin-right: 30px;
+    font-size: 15px;
+}
+
 .notLoggedPlayer{
     border: 1px solid; 
     border-color:darkseagreen;

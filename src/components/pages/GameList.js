@@ -9,6 +9,7 @@ import AddGame from '../admin/AddGame';
 import Button from 'react-bootstrap/Button';
 import '../styles/GameList.css';
 import { clearPlayer } from '../../store/actions/playerActions';
+import { overview } from '../games/defaultRules';
 
 function GameList() {
     const [showAddGameButton, setShowAddGameButton] = useState(true);
@@ -76,14 +77,24 @@ function GameList() {
                 )}
                 </div>
                 <div>
-                    {!keycloak.authenticated ? <p className="info-text">Log in to see more game details and play</p>:
-                        <div className="info-text">
-                            <p>Hello {user.name}!</p>
+                    {!keycloak.authenticated ? 
+                        <p className="info-text">Log in to see more details and play the game!</p> :
+                        <div>
+                            {showAddGameButton ? <div className="add-game-container">
+                                <p className="username">Hello {user.name}!</p>
+                                {user.isAdmin && <div>
+                                    {showAddGameButton && <Button className="add-game-btn" variant="info" size="sm" onClick={handleClickAddGame}>
+                                        Add new game</Button>}
+                                </div>}
+                            </div>:
+                            <AddGame hideForm={hideForm} latitude={currentLatitude} longitude={currentLongitude} />}
                         </div>}
-                    {user.isAdmin && <div>
-                        {showAddGameButton ? <Button variant="info" onClick={handleClickAddGame}>Add game</Button>:
-                        <AddGame hideForm={hideForm} latitude={currentLatitude} longitude={currentLongitude} /> }
-                    </div> }
+                    <br/>
+                    {showAddGameButton && <div className="overview">
+                        <h5>Game overview</h5>
+                        <p>{overview}</p>
+                        <p>See the specific rules by register to the game.</p>
+                    </div>}
                 </div>
             </div>
         </div>

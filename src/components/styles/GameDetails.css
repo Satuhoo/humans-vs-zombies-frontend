@@ -97,19 +97,19 @@
     }
 }
 
-#message{
-   
-}
-
-#messageButton{
-     margin-top: 20px;      
-     margin-bottom: 20px; 
+#messageButton{     
+     margin-left: 2px;
      text-align: center;  
-   
+     height: 40px;
 }
 
 #messageInput{
     margin-top: 20px;     
+    display: flex;
+}
+
+.message-input-field {
+    min-height: 40px;
 }
 
 .chatBox{
@@ -121,7 +121,7 @@
     white-space: pre-wrap; /* CSS 2.1 */
     white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
     word-wrap: break-word; /* IE */
-    max-width: 40vh;
+    max-width: 100%;
     max-height: 50vh;
     overflow: auto; 
     display: flex;

@@ -12,8 +12,6 @@ import MessageForm from '../forms/MessageForm'
 import { useSelector } from 'react-redux';
 
 function ChatBox() {    
-
-
     const { keycloak } = useKeycloak();
     const dispatch = useDispatch();    
     const game = useSelector(state => state.gameReducer.game);
@@ -32,22 +30,24 @@ function ChatBox() {
     }
 
     const addMessage = (event) => {
-         event.preventDefault();         
+        event.preventDefault();         
         const chatMessage = {
           "content" : newMessage,
           "globalChat" : activeTab === "global"                                             
         }        
-        if (activeTab === "global")
+        if (activeTab === "global") {
             dispatch(submitGlobalMessage(game.id, chatMessage, keycloak.token)); 
-        else
+        } else {
             dispatch(submitMessage(game.id, chatMessage, keycloak.token)); 
         }
+        setNewMessage('');
+    }
 
     if (user.isAdmin){
         return (
             <div className = "chat">
                 <Tabs transition={false} onSelect={setSelectedTab}>
-                    <Tab eventKey="humanAndZombia" title="Human 'n Zombie Chat">
+                    <Tab eventKey="humanAndZombia" title="Game Chat">
                         <HumanZombieChat gameId={game.id} playerId={player.id} player={player}/>
                     </Tab>
                     <Tab eventKey="global" title="Global Chat">
@@ -73,7 +73,7 @@ function ChatBox() {
                         <GlobalChat  gameId={game.id} playerId={player.id} player={player}/>
                     </Tab>       
                 </Tabs>
-            
+
                 <MessageForm gameId={game.id} layerId={player.id}
                 newMessage = {newMessage} onSubmit={addMessage} 
                 handleMessageChange = {handleMessageChange}></MessageForm>

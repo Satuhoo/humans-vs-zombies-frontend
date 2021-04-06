@@ -135,7 +135,7 @@ function GameDetails(props) {
     if (game.gameState === 'COMPLETE') {
         return (
             <div>
-                <SockJsClient url='http://localhost:8080/ws' 
+                <SockJsClient url={process.env.REACT_APP_SOCK_JS_URL} 
                     topics={[
                         "/topic/deleteGame"
                     ]}
@@ -147,7 +147,7 @@ function GameDetails(props) {
     } else {
         return (
             <div>
-                <SockJsClient url='http://localhost:8080/ws' 
+                <SockJsClient url={process.env.REACT_APP_SOCK_JS_URL}
                     topics={[
                         "/topic/updateGame",
                         "/topic/deleteGame",

@@ -26,7 +26,7 @@ function GlobalChat(props) {
 
     return (
         <div className="chatBox">
-            <SockJsClient url='http://localhost:8080/ws' 
+            <SockJsClient url={process.env.REACT_APP_SOCK_JS_URL} 
                 topics={[
                     "/topic/addChatMessage"
                 ]}

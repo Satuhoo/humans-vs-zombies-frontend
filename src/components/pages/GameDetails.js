@@ -27,6 +27,7 @@ function GameDetails(props) {
     const dispatch = useDispatch();
     const [registered, setRegistered] = useState(false);
     const [biteCode, setBiteCode] = useState('');
+    const [story, setStory] = useState('');
     const [showEditView, setShowEditView] = useState(false);
     const [playerName, setPlayerName] = useState('');
     const [loading, setLoading] = useState(true);
@@ -68,6 +69,10 @@ function GameDetails(props) {
         setBiteCode(event.target.value);
     }
 
+    const handleStoryChange = (event) => {
+        setStory(event.target.value);
+    }
+
     const handlePlayerNameChange = (event) => {
         setPlayerName(event.target.value);
     }
@@ -79,11 +84,13 @@ function GameDetails(props) {
             const kill = {
                 'biteCode': biteCode,
                 'killerId': player.id,
+                'story': story,
                 'lat': position.coords.latitude,
                 'lng': position.coords.longitude
             }
-            dispatch(killPlayer(game.id, kill))
-            setBiteCode('')
+            dispatch(killPlayer(game.id, kill));
+            setBiteCode('');
+            setStory('');
         })
     }
 
@@ -143,13 +150,14 @@ function GameDetails(props) {
                     {/* Checks if user is an admin, if user is registered to the game and the player 
                         state. Shows the right view depending on those*/}
                     {!user.isAdmin ? <div className="grid-item item3">
-                        {registered ? <p><br></br>Player id {player.id}</p>: 
+                        {!registered &&
                             <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
                                 handleRegistration={handleRegistration} />}
                         {registered && !showEditView && 
                                 (player.human 
                                     ? <div>Your bite code is <b>{player.biteCode}</b></div>
-                                    : <BiteCodeForm biteCode={biteCode} onSubmit={handleBite} handleBiteCodeChange={handleBiteCodeChange}/>
+                                    : <BiteCodeForm biteCode={biteCode} story={story} onSubmit={handleBite} 
+                                    handleBiteCodeChange={handleBiteCodeChange} handleStoryChange={handleStoryChange}/>
                                 )
                         }    
                     </div>

@@ -12,7 +12,7 @@ function Map(props) {
 
     useEffect(() => {
       dispatch(getKills(props.game.id));      
-    }, [props.game.id, dispatch, kills])
+    }, [props.game.id, dispatch])
 
     const onReceiveMessage = gameId => {
       if (gameId === props.game.id) {

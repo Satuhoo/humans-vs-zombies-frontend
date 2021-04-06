@@ -7,11 +7,11 @@ function MapMarker(props) {
     let newIcon = L.icon({
       iconUrl: gs,
       iconRetinaUrl: gs,        
-      iconSize: [80, 80]
+      iconSize: [50, 50]
     });
     
     const markers = props.kills.map (kill => {
-        return <div>
+        return <div key={kill.id}>
         <Marker position = {[kill.lat, kill.lng]} icon = {newIcon}>
             <Popup>
                 {kill.story}

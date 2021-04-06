@@ -16,6 +16,25 @@
 
 .link {
     margin-right: 30px;
+    color: orange;
+}
+
+.link:hover {
+    color: darkorange;
+    text-decoration: none;
+}
+
+.header-btn {
+    background-color: orange;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.header-btn:hover {
+    background-color: darkorange;
 }
 
 @media (max-width: 800px) {

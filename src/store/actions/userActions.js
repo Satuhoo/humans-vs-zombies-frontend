@@ -1,8 +1,9 @@
-export const login = (userId, isAdmin) => ({
+export const login = (userId, isAdmin, name) => ({
     type: 'LOGIN',
     payload: {
         userId,
-        isAdmin
+        isAdmin,
+        name
     }
 })
 

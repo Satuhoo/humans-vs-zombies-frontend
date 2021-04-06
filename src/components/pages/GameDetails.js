@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getGame } from '../../store/actions/gameActions';
 import { getLoggedPlayer } from '../../store/actions/playerActions';
-import { addPlayerToGame } from '../../store/actions/playerActions';
+import { addPlayerToGame, updatePlayer } from '../../store/actions/playerActions';
 import { killPlayer } from '../../store/actions/killActions'
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
@@ -14,30 +14,32 @@ import GameRegistrationForm from '../forms/GameRegistrationForm';
 import AdminBar from "../admin/AdminBar";
 import PlayerList from '../admin/PlayerList';
 import GameState from '../games/GameState';
+import CompletedGame from '../games/CompletedGame';
 import { useKeycloak } from '@react-keycloak/web';
+import { getPlayers } from '../../store/actions/playerActions';
 
 function GameDetails(props) {    
     const id = props.match.params.id;
     const game = useSelector(state => state.gameReducer.game);
     const player = useSelector(state => state.playerReducer.player);
     const user = useSelector(state => state.user);
+    const players = useSelector(state => state.playerReducer.players)
     const dispatch = useDispatch();
     const [registered, setRegistered] = useState(false);
     const [biteCode, setBiteCode] = useState('');
     const [showEditView, setShowEditView] = useState(false);
     const [playerName, setPlayerName] = useState('');
     const [loading, setLoading] = useState(true);
-    const [gameState, setGameState] = useState('');
     const { keycloak } = useKeycloak();
 
     useEffect(() => {
         dispatch(getGame(id));
-        dispatch(getLoggedPlayer(id, keycloak.token))
+        dispatch(getLoggedPlayer(id, keycloak.token));
+        dispatch(getPlayers(id));
     }, [id, dispatch, keycloak.token])
 
     useEffect(() => {
         if (game !== undefined && player !== undefined) {
-            setGameState();
             if (player.id !== -1) {
                 setRegistered(true);
             } else {
@@ -46,18 +48,6 @@ function GameDetails(props) {
             setLoading(false);
         }
     }, [game, player])
-
-    useEffect(() => {
-        if (game !== undefined) {
-            if (game.gameState === 'REGISTRATION') {
-                setGameState('Registration')
-            } else if (game.gameState === 'IN_PROGRESS') {
-                setGameState('In progress')
-            } else {
-                setGameState('Game is finished')
-            }
-        }
-    }, [game, gameState])
 
     if (loading) return null;
 
@@ -95,10 +85,33 @@ function GameDetails(props) {
         setShowEditView(true);
     }
 
+    const handlePlayerStateChange = playerItem => {
+        const changedPlayer = {
+            ...playerItem,
+            game: {
+                ...game,
+                players: [],
+                kills: [],
+                chat: null
+            },
+            messages: [],
+            kills: [],
+            human: !playerItem.human,
+            victimOf: null
+        }
+
+        dispatch(updatePlayer(game.id, changedPlayer))
+    }
+
     const hideForm = () => {
         setShowEditView(false);
     }
 
+    if (game.gameState === 'COMPLETE') {
+        return (
+            <CompletedGame game={game} players={players} user={user}/>
+        )
+    } else {
     return (
         <div>
             {user.isAdmin && <AdminBar game={game} hideForm={hideForm} showEditView={showEditView}
@@ -112,7 +125,7 @@ function GameDetails(props) {
                     {(registered || user.isAdmin) && <div>
                         <h3>Game state</h3>
                         <GameState game={game}/>
-                         <ChatBox gameId={id} playerId={player.id} player={player}/>                         
+                         <ChatBox/>                         
                     </div>}
                 </div>
                 {!user.isAdmin ? <div className="grid-item item3">
@@ -127,7 +140,7 @@ function GameDetails(props) {
                             )
                     }    
                 </div>
-                : <PlayerList gameId={id}/> }  
+                : <PlayerList gameId={id} handlePlayerStateChange={handlePlayerStateChange} /> }  
                 <div className="grid-item item4">
                     <h3>Location</h3>
                     
@@ -136,6 +149,7 @@ function GameDetails(props) {
             </div>
         </div>
     )
+                }
 }
 
 export default GameDetails;

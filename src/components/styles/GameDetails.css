@@ -55,6 +55,13 @@
     grid-row: 1 / span 3;
 }
 
+.admin-container {
+    display: flex;
+    padding: 8px 120px 8px 70px;
+    background-color: black;
+    justify-content: flex-end;
+}
+
 @media (max-width: 800px) {
     .game-details-container {
         display: flex;
@@ -78,26 +85,25 @@
 }
 
 #message{
-    border-bottom: 1px solid; 
-    border-color:cornflowerblue;
-    padding: 10px; 
+   
 }
 
-.leaflet-div-icon {
-    /* leaflet marker css */
-}  
-  #messageButton{
+#messageButton{
      margin-top: 20px;      
      margin-bottom: 20px; 
      text-align: center;  
    
-  }
+}
 
-  #messageInput{
+#messageInput{
     margin-top: 20px;     
- }
+}
 
+<<<<<<< HEAD
  .chatBox{
+=======
+.chatBox{
+>>>>>>> 6b1897f6eb5cec17172c8182bf95f3f72e5254e4
     white-space: pre; /* CSS2 */
     white-space: -moz-pre-wrap; /* Mozilla */
     white-space: -hp-pre-wrap; /* HP printers */
@@ -107,8 +113,48 @@
     white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
     word-wrap: break-word; /* IE */
     max-width: 40vh;
+<<<<<<< HEAD
     max-height: 40vh;
+=======
+    max-height: 50vh;
+>>>>>>> 6b1897f6eb5cec17172c8182bf95f3f72e5254e4
     overflow: auto; 
     display: flex;
-    flex-direction: column-reverse;   
- }
+    flex-direction: column-reverse;  
+   
+}
+
+.loggedPlayer{
+    border: 1px solid; 
+    border-color:cornflowerblue;
+    border-radius: 6px;
+    padding:10px; 
+    background-color: cornflowerblue;
+    color: white;
+    margin-right: 30px;
+    font-size: 15px;
+}
+
+.notLoggedPlayer{
+    border: 1px solid; 
+    border-color:darkseagreen;
+    border-radius: 6px;
+    padding:10px; 
+    background-color:darkseagreen;
+    color: white;
+    margin-right: 30px;
+}
+
+#senderName{
+    display: inline;
+    text-transform: capitalize;
+    font-weight: bold;
+
+}
+
+#senderAndTime{
+    padding-top: 20px;
+    padding-bottom: 5px;
+    font-size: 0.8em;
+}
+

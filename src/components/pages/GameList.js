@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useKeycloak } from '@react-keycloak/web';
 import AddGame from '../admin/AddGame';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import '../styles/GameList.css';
 import { clearPlayer } from '../../store/actions/playerActions';
 
@@ -54,7 +53,10 @@ function GameList() {
             )}
             </div>
             <div>
-                {!keycloak.authenticated && <p>Please <Link className="link" to="/login">Login</Link></p>}
+                {!keycloak.authenticated ? <p className="info-text">Log in to see more game details and play</p>:
+                    <div className="info-text">
+                        <p>Hello {user.name}!</p>
+                    </div>}
                 {user.isAdmin && <div>
                     {showAddGameButton ? <Button variant="info" onClick={handleClickAddGame}>Add game</Button>:
                     <AddGame hideForm={hideForm} latitude={currentLatitude} longitude={currentLongitude} /> }

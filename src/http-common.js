@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://backend-hvz.herokuapp.com/api/v1",  
+  baseURL: process.env.REACT_APP_API_BASE_URL,  
 });

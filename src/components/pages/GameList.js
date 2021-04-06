@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { getGames, clearGame } from '../../store/actions/gameActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useKeycloak } from '@react-keycloak/web';
+import SockJsClient from 'react-stomp';
 import AddGame from '../admin/AddGame';
 import Button from 'react-bootstrap/Button';
 import '../styles/GameList.css';
@@ -52,33 +53,49 @@ function GameList() {
         setShowAddGameButton(true);
     }
 
+    const onReceiveMessage = () => {
+        dispatch(getGames())
+    }
+
     return (
-        <div className="game-list-container">
-            <div>
-            <h1>Games</h1>
-            {games.map((game) => 
-                <Game game={game} key={game.id} gameClicked={handleClickGame}/>
-            )}
-            </div>
-            <div>
-                {!keycloak.authenticated ? 
-                    <p className="info-text">Log in to see more details and play the game!</p> :
-                    <div>
-                        {showAddGameButton ? <div className="add-game-container">
-                            <p className="username">Hello {user.name}!</p>
-                            {user.isAdmin && <div>
-                                {showAddGameButton && <Button className="add-game-btn" variant="info" size="sm" onClick={handleClickAddGame}>
-                                    Add new game</Button>}
-                            </div>}
-                        </div>:
-                        <AddGame hideForm={hideForm} latitude={currentLatitude} longitude={currentLongitude} />}
+        <div>
+            <SockJsClient url={process.env.REACT_APP_SOCK_JS_URL}
+                topics={[
+                    "/topic/addGame",
+                    "/topic/updateGame",
+                    "/topic/deleteGame",
+                    "/topic/addPlayer",
+                    "/topic/deletePlayer"
+                ]}
+                onMessage={ () => onReceiveMessage() }
+            />
+            <div className="game-list-container">
+                <div>
+                <h1>Games</h1>
+                {games.map((game) => 
+                    <Game game={game} key={game.id} gameClicked={handleClickGame}/>
+                )}
+                </div>
+                <div>
+                    {!keycloak.authenticated ? 
+                        <p className="info-text">Log in to see more details and play the game!</p> :
+                        <div>
+                            {showAddGameButton ? <div className="add-game-container">
+                                <p className="username">Hello {user.name}!</p>
+                                {user.isAdmin && <div>
+                                    {showAddGameButton && <Button className="add-game-btn" variant="info" size="sm" onClick={handleClickAddGame}>
+                                        Add new game</Button>}
+                                </div>}
+                            </div>:
+                            <AddGame hideForm={hideForm} latitude={currentLatitude} longitude={currentLongitude} />}
+                        </div>}
+                    <br/>
+                    {showAddGameButton && <div className="overview">
+                        <h5>Game overview</h5>
+                        <p>{overview}</p>
+                        <p>See the specific rules by register to the game.</p>
                     </div>}
-                <br/>
-                {showAddGameButton && <div className="overview">
-                    <h5>Game overview</h5>
-                    <p>{overview}</p>
-                    <p>See the specific rules by register to the game.</p>
-                </div>}
+                </div>
             </div>
         </div>
     )

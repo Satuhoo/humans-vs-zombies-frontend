@@ -59,7 +59,13 @@ function GameList() {
     return (
         <div>
             <SockJsClient url='http://localhost:8080/ws' 
-                topics={["/topic/addGame"]}
+                topics={[
+                    "/topic/addGame",
+                    "/topic/updateGame",
+                    "/topic/deleteGame",
+                    "/topic/addPlayer",
+                    "/topic/deletePlayer"
+                ]}
                 onMessage={ () => onReceiveMessage() }
             />
             <div className="game-list-container">

@@ -14,6 +14,7 @@ function DeleteGame({game}) {
 
     const deleteGame = (event) => {
         event.preventDefault();
+        //Shows the alert and deletes the game if clicking yes. Navigates back to the landing page
         confirmAlert({
             title: 'Delete game',
             message: 'Are you sure to do this?',

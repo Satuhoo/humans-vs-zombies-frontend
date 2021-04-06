@@ -11,7 +11,6 @@ function UpdateGame({game, hideForm}) {
     const dispatch = useDispatch();
     
     const handleNameChange = (event) => {
-        console.log(event.target.value)
         setName(event.target.value);
     }
 
@@ -24,7 +23,6 @@ function UpdateGame({game, hideForm}) {
     }
 
     const handleGameStateChange = (event) => {
-        console.log(event.target.value)
         setGameState(event.target.value)
     }
 

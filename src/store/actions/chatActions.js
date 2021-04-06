@@ -14,7 +14,6 @@ export const getChat = (id, jwtStr) => {
     };    
 }
 
-
 export const submitGlobalMessage = (gameId, message, jwtStr) => {    
     return dispatch => {
         chatService.addMessage(gameId, message, jwtStr)

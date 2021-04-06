@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import GameLocationMarker from './GameLocationMarker';
 
+//Shown when adding the new game, helps to set game coordinates using the map
 function AdminMap({latitude, longitude}) {
     return (
       <div className="leaflet-container">

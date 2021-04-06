@@ -19,12 +19,16 @@ function GameList() {
     const dispatch = useDispatch();
     const { keycloak } = useKeycloak();
 
+    //Calls the redux actions which fetch all games
+    //Clears the player and the game from the redux, so it's not holding previous 
+    //values if navigating between multiple game details pages
     useEffect(() => {
         dispatch(getGames());
         dispatch(clearPlayer());
         dispatch(clearGame());
     }, [dispatch])
 
+    //Checks the current location of the user
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(function(position) {
             setCurrentLatitude(position.coords.latitude);
@@ -32,14 +36,17 @@ function GameList() {
         })
     }, [])
 
+    //When game is clicked, navigates to the game details page by the game id
     const handleClickGame = (game) => {
         history.push(`/games/${game.id}`)
     }
 
+    //Hides the add game button and opens the form 
     const handleClickAddGame = () => {
         setShowAddGameButton(false);
     }
 
+    //Hides the form and shows the add game button
     const hideForm = () => {
         setShowAddGameButton(true);
     }

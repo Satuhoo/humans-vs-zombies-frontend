@@ -9,6 +9,7 @@ function UpdateGameState({game}) {
 
     const startGame = (event) => {
         event.preventDefault();
+        //Shows the alert and update the game state for 'in progress' if clicking yes
         confirmAlert({
             title: 'Start game',
             message: 'Are you sure to do this?',
@@ -35,6 +36,7 @@ function UpdateGameState({game}) {
 
     const endGame = (event) => {
         event.preventDefault();
+        //Shows the alert and update the game state for 'complete' if clicking yes
         confirmAlert({
             title: 'Finish game',
             message: 'Are you sure to do this?',
@@ -59,6 +61,7 @@ function UpdateGameState({game}) {
           });
     }
 
+    //Checks the current game state and return right button to updating it
     return (
         <div>
            {(() => {
@@ -67,8 +70,6 @@ function UpdateGameState({game}) {
                     return <Button variant="info" size="sm" onClick={startGame}>Start game</Button>;
                 case "IN_PROGRESS": 
                     return <Button variant="info" size="sm" onClick={endGame}>End game</Button>;
-                case "COMPLETE":
-                        return <span className="complete-text">Completed</span>
                 default: return null;
                 }
             })()}

@@ -7,10 +7,11 @@ function GameLocationMarker() {
     const [position, setPosition] = useState(null);
     const dispatch = useDispatch();
 
+    //When clicking the map, sets clicked position coordinates to the redux and 
+    //shows the marker in the map
     const map = useMapEvents({
       click(e) {
         map.locate()
-        console.log(e.latlng)
         setPosition(e.latlng)
         dispatch(setGameCoordinates(e.latlng))
       },

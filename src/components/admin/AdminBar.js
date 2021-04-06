@@ -6,6 +6,7 @@ import {faPen} from '@fortawesome/free-solid-svg-icons';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 import '../styles/GameDetails.css';
 
+//Shown only for admin and contains all button for update the game or delete it
 function AdminBar({game, hideForm, showEditView, handleClickEdit}) {
     return (
         <div className="admin-grid-container">

@@ -11,25 +11,21 @@ export function chatReducer(state = initialState, action) {
                 ...state,
                 messages: action.messages
             }
-
             case 'ADD_GLOBAL_MESSAGE':
                 return {
                     ...state,
                     globalMessages: [...state.globalMessages, action.newMessage]
                 }
-
-                case 'ADD_FACTION_MESSAGE':
+            case 'ADD_FACTION_MESSAGE':
                 return {
                     ...state,
                     messages: [...state.messages, action.newMessage]
                 }
-
-                case 'GET_GLOBAL_CHAT':
-                    return {
-                        ...state,
-                        globalMessages: action.globalMessages
-                    }
-      
+            case 'GET_GLOBAL_CHAT':
+                return {
+                    ...state,
+                    globalMessages: action.globalMessages
+                }
         default:
             return state
     }

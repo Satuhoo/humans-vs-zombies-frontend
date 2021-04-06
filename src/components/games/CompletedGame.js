@@ -3,8 +3,8 @@ import GameState from './GameState';
 import DeleteGame from '../admin/DeleteGame';
 import '../styles/GameDetails.css';
 
+//Shown when game state is complete
 function CompletedGame({game, user}) {
-
     return (
         <div>
             {user.isAdmin && <div className="admin-container">

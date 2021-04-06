@@ -11,6 +11,7 @@ function Header() {
                 </div>
             <div>
                 <Link className="link" to="/games">Games</Link>
+                {/* Checks if the user is logged in and shows the login or logout button depending on that */}
                 {keycloak.authenticated ? 
                     <button className="header-btn" onClick={() => keycloak.logout()}>
                         Logout

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { getGlobalChat } from '../../store/actions/chatActions';
 import { useSelector } from 'react-redux';
-
+import SockJsClient from 'react-stomp';
 
 function GlobalChat(props) {    
     const dispatch = useDispatch();
@@ -18,8 +18,20 @@ function GlobalChat(props) {
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
     }
 
+    const onReceiveMessage = gameId => {
+        if (gameId === props.gameId) {
+            dispatch(getGlobalChat(props.gameId));
+        }
+    }
+
     return (
-        <div className="chatBox">          
+        <div className="chatBox">
+            <SockJsClient url={process.env.REACT_APP_SOCK_JS_URL} 
+                topics={[
+                    "/topic/addChatMessage"
+                ]}
+                onMessage={ gameId => onReceiveMessage(gameId) }
+            />            
         <div>  
             {globalMessages.map(message => <div key={message.id}  id = "message">
                 <div id="senderAndTime"><p id ="senderName">{message.senderName}</p> {formatTimeStamp(message.timeStamp)}</div> 

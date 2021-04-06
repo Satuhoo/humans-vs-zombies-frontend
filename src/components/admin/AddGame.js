@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddGameForm from '../forms/AddGameForm';
 import { createGame } from '../../store/actions/gameActions';
-import defaultRules from '../games/defaultRules';
+import { defaultRules } from '../games/defaultRules';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';

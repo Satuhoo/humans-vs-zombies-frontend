@@ -144,7 +144,7 @@ function GameDetails(props) {
                 <div className="grid-item item4">
                     <h3>Location</h3>
                     
-                    <Map gameId={id} />
+                    <Map game={game} />
                 </div>
             </div>
         </div>

@@ -36,7 +36,6 @@ export function gameReducer(state = initialState, action) {
                 ...state,
                 coordinates: action.coordinates
             }
-<<<<<<< HEAD
 
         case 'GET_KILLS':
             return{
@@ -44,7 +43,6 @@ export function gameReducer(state = initialState, action) {
                 kills: action.kills
             }
             
-=======
         case 'ADD_KILL_TO_GAME':
             return {
                 ...state,
@@ -66,7 +64,6 @@ export function gameReducer(state = initialState, action) {
                 ...state,
                 kills: action.kills
             }
->>>>>>> 6b1897f6eb5cec17172c8182bf95f3f72e5254e4
         case 'CLEAR_GAME':
             return {
                 ...state,

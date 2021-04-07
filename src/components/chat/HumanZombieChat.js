@@ -20,8 +20,8 @@ function HumanZombieChat(props) {
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
     }
 
-    const onReceiveMessage = gameId => {
-        if (gameId === props.gameId) {
+    const onReceiveMessage = msg => {
+        if (msg.gameId === props.gameId) {
             dispatch(getChat(props.gameId, keycloak.token));
         }
     }
@@ -33,7 +33,7 @@ function HumanZombieChat(props) {
                 topics={[
                     "/topic/addChatMessage"
                 ]}
-                onMessage={ gameId => onReceiveMessage(gameId) }
+                onMessage={ msg => onReceiveMessage(msg) }
             />                  
         <div>  
             {messages.map(message => <div key={message.id}  id = "message">

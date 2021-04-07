@@ -14,8 +14,8 @@ function Map(props) {
       dispatch(getKills(props.game.id));      
     }, [props.game.id, dispatch])
 
-    const onReceiveMessage = gameId => {
-      if (gameId === props.game.id) {
+    const onReceiveMessage = msg => {
+      if (msg.gameId === props.game.id) {
         dispatch(getKills(props.game.id)); 
       }
     }
@@ -27,7 +27,7 @@ function Map(props) {
               "/topic/addKill",
               "/topic/updatePlayer"
           ]}
-          onMessage={ gameId => onReceiveMessage(gameId) }
+          onMessage={ msg => onReceiveMessage(msg) }
         />
         <div className="leaflet-container">
           <MapContainer

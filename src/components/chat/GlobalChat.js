@@ -18,8 +18,8 @@ function GlobalChat(props) {
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
     }
 
-    const onReceiveMessage = gameId => {
-        if (gameId === props.gameId) {
+    const onReceiveMessage = msg => {
+        if (msg.gameId === props.gameId) {
             dispatch(getGlobalChat(props.gameId));
         }
     }
@@ -30,7 +30,7 @@ function GlobalChat(props) {
                 topics={[
                     "/topic/addChatMessage"
                 ]}
-                onMessage={ gameId => onReceiveMessage(gameId) }
+                onMessage={ msg => onReceiveMessage(msg) }
             />            
         <div>  
             {globalMessages.map(message => <div key={message.id}  id = "message">

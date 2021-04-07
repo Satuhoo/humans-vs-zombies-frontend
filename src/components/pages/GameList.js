@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import '../styles/GameList.css';
 import { clearPlayer } from '../../store/actions/playerActions';
 import { overview } from '../games/defaultRules';
+import { setUserName } from '../../store/actions/userActions';
 
 function GameList() {
     const [showAddGameButton, setShowAddGameButton] = useState(true);
@@ -37,6 +38,16 @@ function GameList() {
             setCurrentLongitude(position.coords.longitude);
         })
     }, [])
+
+    //Checks if there is not user's name in the redux and fetchs it from keycloak if not
+    useEffect(() => {
+        if (user.name === undefined) {
+            keycloak.loadUserInfo()
+            .then(currentUser => {
+                dispatch(setUserName(currentUser.given_name))
+            })
+        } 
+    }, [user.name, keycloak, dispatch])
 
     //When game is clicked, navigates to the game details page by the game id
     const handleClickGame = (game) => {
@@ -81,7 +92,9 @@ function GameList() {
                         <p className="info-text">Log in to see more details and play the game!</p> :
                         <div>
                             {showAddGameButton ? <div className="add-game-container">
-                                <p className="username">Hello {user.name}!</p>
+                                <div>
+                                {user.name !== undefined && <p className="username">Hello {user.name}!</p>}
+                                </div>
                                 {user.isAdmin && <div>
                                     {showAddGameButton && <Button className="add-game-btn" variant="info" size="sm" onClick={handleClickAddGame}>
                                         Add new game</Button>}

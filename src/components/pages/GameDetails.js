@@ -124,11 +124,17 @@ function GameDetails(props) {
         setShowEditView(false);
     }
 
-    const onReceiveMessage = gameId => {
-        if (String(gameId) === id) {
+    const onReceiveMessage = msg => {
+        if (String(msg.gameId) === id) {
             dispatch(getGame(id))
             dispatch(getLoggedPlayer(id, keycloak.token))
             dispatch(getPlayers(id))
+        }
+
+        if (msg.type === "ADD_KILL" && msg.victimId === player.id) {
+            window.alert(
+                `Uh-oh, you were turned into a zombie by ${msg.killerName}!${msg.story ? ` Story: "${msg.story}"` : ''}`
+            )
         }
     }
 
@@ -139,7 +145,7 @@ function GameDetails(props) {
                     topics={[
                         "/topic/deleteGame"
                     ]}
-                    onMessage={ gameId => onReceiveMessage(gameId) }
+                    onMessage={ msg => onReceiveMessage(msg) }
                 />
                 <CompletedGame game={game} players={players} user={user}/>
             </div>

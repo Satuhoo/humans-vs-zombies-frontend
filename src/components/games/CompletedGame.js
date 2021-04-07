@@ -1,10 +1,14 @@
 import Map from '../map/Map';
 import GameState from './GameState';
 import DeleteGame from '../admin/DeleteGame';
+import { useSelector } from 'react-redux';
 import '../styles/GameDetails.css';
 
 //Shown when game state is complete
 function CompletedGame({game, user}) {
+    const kills = useSelector(state => state.gameReducer.kills);
+    const players = useSelector(state => state.playerReducer.players);
+
     return (
         <div>
             {user.isAdmin && <div className="admin-container">
@@ -13,6 +17,9 @@ function CompletedGame({game, user}) {
             <div className="grid-container">
                 <div>
                     <h2>{game.name}</h2>
+                    <br/>
+                    <p>Players in the game: {players.length}</p>
+                    <p>Kills in the game: {kills.length}</p>
                 </div>
                 <div>
                     <Map game={game}/>

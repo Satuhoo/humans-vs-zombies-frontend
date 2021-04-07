@@ -9,7 +9,7 @@ function BiteCodeForm(props) {
             <Form onSubmit={props.onSubmit}>
                 <Form.Control placeholder="Bite code" value={props.biteCode} onChange={props.handleBiteCodeChange} />
                 <br/>
-                <Form.Control placeholder="Story (optional)" value={props.story} as="textarea" onChange={props.handleStoryChange} rows={2} maxLength={100}/>
+                <Form.Control placeholder="Story (optional)" value={props.story} onChange={props.handleStoryChange} maxLength={60}/>
                 <br/>
                 <Button variant="info" type="submit">Bite</Button>
             </Form>

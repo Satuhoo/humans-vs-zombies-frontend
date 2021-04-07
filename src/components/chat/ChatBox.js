@@ -10,14 +10,21 @@ import { submitGlobalMessage, submitMessage } from '../../store/actions/chatActi
 import { useKeycloak } from '@react-keycloak/web';
 import MessageForm from '../forms/MessageForm'
 import { useSelector } from 'react-redux';
-
+import Button from 'react-bootstrap/Button';
 function ChatBox() {    
     const { keycloak } = useKeycloak();
     const dispatch = useDispatch();    
     const game = useSelector(state => state.gameReducer.game);
     const player = useSelector(state => state.playerReducer.player);
     const user = useSelector(state => state.user);
+    const [showChat, setShowChat] = useState(false);
 
+    const toggleChat = () =>{
+        if (showChat)
+            setShowChat(false)
+        else
+            setShowChat(true)
+    }
     const [newMessage, setNewMessage] = useState('');
     const [activeTab, setActiveTab] = useState('');
 
@@ -28,6 +35,7 @@ function ChatBox() {
     const setSelectedTab = (tab) =>{        
         setActiveTab(tab)          
     }
+    console.log(player)
 
     const addMessage = (event) => {
         event.preventDefault();         
@@ -45,40 +53,46 @@ function ChatBox() {
 
     if (user.isAdmin){
         return (
-            <div className = "chat">
-                <Tabs transition={false} onSelect={setSelectedTab}>
-                    <Tab eventKey="humanAndZombia" title="Game Chat">
-                        <HumanZombieChat gameId={game.id} playerId={player.id} player={player}/>
-                    </Tab>
-                    <Tab eventKey="global" title="Global Chat">
-                        <GlobalChat  gameId={game.id} playerId={player.id} player={player}/>
-                    </Tab>       
-                </Tabs>
-            
-                <MessageForm gameId={game.id} layerId={player.id}
-                newMessage = {newMessage} onSubmit={addMessage} 
-                handleMessageChange = {handleMessageChange}></MessageForm>
-            
-            </div>
+            <div>
+                <Button id="chatButton" variant="info" size="sm" type="submit" onClick={toggleChat}> 
+                {showChat ? 'Hide Chat' : 'Show Chat'}</Button>            
+            {showChat ? 
+                <div className = "chat">
+                    <Tabs transition={false} onSelect={setSelectedTab}>
+                        <Tab eventKey="humanAndZombia" title="Game Chat">
+                            <HumanZombieChat gameId={game.id} playerId={player.id} player={player}/>
+                        </Tab>
+                        <Tab eventKey="global" title="Global Chat">
+                            <GlobalChat  gameId={game.id} playerId={player.id} player={player}/>
+                        </Tab>       
+                    </Tabs>            
+                    <MessageForm gameId={game.id} layerId={player.id}
+                    newMessage = {newMessage} onSubmit={addMessage} 
+                    handleMessageChange = {handleMessageChange}></MessageForm>            
+                </div>
+        : null}</div>
         )
 
     }else{
         return (
-            <div className = "chat">
-                <Tabs transition={false} onSelect={setSelectedTab}>
-                    <Tab eventKey="faction" title="Faction Chat">
-                        <FactionChat gameId={game.id} playerId={player.id} player={player}/>
-                    </Tab>
-                    <Tab eventKey="global" title="Global Chat">
-                        <GlobalChat  gameId={game.id} playerId={player.id} player={player}/>
-                    </Tab>       
-                </Tabs>
-
-                <MessageForm gameId={game.id} layerId={player.id}
-                newMessage = {newMessage} onSubmit={addMessage} 
-                handleMessageChange = {handleMessageChange}></MessageForm>
-            
-            </div>
+            <div>
+                <Button id="chatButton" variant="info" size="sm" type="submit" onClick={toggleChat}> 
+                {showChat ? 'Hide Chat' : 'Show Chat'}</Button>            
+            {showChat ? 
+                <div className = "chat">                
+                    <Tabs transition={false} onSelect={setSelectedTab}>
+                        <Tab eventKey="faction" title={player.human ? 'Human Chat' : 'Zombie Chat'}>
+                            <FactionChat gameId={game.id} playerId={player.id} player={player}/>
+                        </Tab>
+                        <Tab eventKey="global" title="Global Chat">
+                            <GlobalChat  gameId={game.id} playerId={player.id} player={player}/>
+                        </Tab>       
+                    </Tabs>
+                    <MessageForm gameId={game.id} layerId={player.id}
+                    newMessage = {newMessage} onSubmit={addMessage} 
+                    handleMessageChange = {handleMessageChange}></MessageForm>               
+                </div>
+            : null}</div>
         )
     }
 }

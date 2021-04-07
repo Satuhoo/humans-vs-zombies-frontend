@@ -82,3 +82,15 @@ export const getKills = (id) => {
         })
     };
 }
+
+export const getStatistics = (id) => {
+    return dispatch => {
+        gameService.getStatisticsByGameId(id)
+        .then(response => {
+            dispatch({
+                type: 'GET_STATISTICS',
+                statistics: response.data
+            })
+        })
+    };
+}

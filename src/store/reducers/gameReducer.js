@@ -69,6 +69,11 @@ export function gameReducer(state = initialState, action) {
                 ...state,
                 game: undefined
             }
+        case 'GET_STATISTICS':
+            return {
+                ...state,
+                statistics: action.statistics
+            }
         default:
             return state
     }

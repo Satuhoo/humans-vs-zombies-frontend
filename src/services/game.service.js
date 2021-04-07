@@ -24,6 +24,10 @@ class GameService {
     getKillsByGameId (id){
         return http.get(`/games/${id}/kills`)
     }
+
+    getStatisticsByGameId (id){
+        return http.get(`/games/${id}/statistics`)
+    }
 }
 
 export default new GameService();

@@ -4,10 +4,12 @@ import Button from 'react-bootstrap/Button';
 import { confirmAlert } from 'react-confirm-alert';
 import '../styles/Alert.css';
 import { updatePlayer } from '../../store/actions/playerActions';
+import { useKeycloak } from '@react-keycloak/web';
 
 function UpdateGameState({game}) {
     const dispatch = useDispatch();
-    const players = useSelector(state => state.playerReducer.players)
+    const players = useSelector(state => state.playerReducer.players);
+    const { keycloak } = useKeycloak(); 
 
     const patientZero = players[Math.floor(Math.random() * players.length)];
 
@@ -28,7 +30,7 @@ function UpdateGameState({game}) {
                       'rules' : game.rules,
                       'gameState' : 'IN_PROGRESS' 
                     }
-                    dispatch(updateGameById(updatedGame)); 
+                    dispatch(updateGameById(updatedGame, keycloak.token)); 
                     const updatePatientZero = {
                       ...patientZero,
                       game: {
@@ -70,7 +72,7 @@ function UpdateGameState({game}) {
                       'rules' : game.rules,
                       'gameState': 'COMPLETE'
                     }
-                    dispatch(updateGameById(updatedGame));
+                    dispatch(updateGameById(updatedGame, keycloak.token));
                 }
               },
               {

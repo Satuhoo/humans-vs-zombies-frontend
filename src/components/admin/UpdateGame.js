@@ -2,6 +2,7 @@ import { useState } from 'react';
 import UpdateGameForm from '../forms/UpdateGameForm';
 import { useDispatch } from "react-redux";
 import { updateGameById } from '../../store/actions/gameActions';
+import { useKeycloak } from '@react-keycloak/web';
 
 function UpdateGame({game, hideForm}) {
     const [name, setName] = useState(game.name);
@@ -9,6 +10,9 @@ function UpdateGame({game, hideForm}) {
     const [rules, setRules] = useState(game.rules);    
     const [gameState, setGameState] = useState(game.gameState);   
     const dispatch = useDispatch();
+    const { keycloak } = useKeycloak(); 
+    
+    
     
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -35,7 +39,7 @@ function UpdateGame({game, hideForm}) {
             'rules' : rules,
             'gameState' : gameState,          
         }        
-        dispatch(updateGameById(updatedGame));
+        dispatch(updateGameById(updatedGame, keycloak.token));
         hideForm();
     }
 

@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { Alert } from 'react-bootstrap';
 import { setGameCoordinates } from '../../store/actions/gameActions';
 import '../styles/GameList.css';
+import { useKeycloak } from '@react-keycloak/web';
 
 function AddGame({hideForm, latitude, longitude}) {
     const [name, setName] = useState('');
@@ -17,6 +18,7 @@ function AddGame({hideForm, latitude, longitude}) {
     const [showAlert, setShowAlert] = useState(false);
     const coordinates = useSelector(state => state.gameReducer.coordinates);
     const dispatch = useDispatch();
+    const { keycloak } = useKeycloak();       
     
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -29,7 +31,7 @@ function AddGame({hideForm, latitude, longitude}) {
     const handleRulesChange = (event) => {
         setRules(event.target.value);
     }
-
+    
     const addGame = (event) => {
         event.preventDefault();
         //Checks entered values and shows alert if there is empty fields
@@ -45,8 +47,8 @@ function AddGame({hideForm, latitude, longitude}) {
                 chat: null,
                 latitude: coordinates.lat,
                 longitude: coordinates.lng
-            }
-            dispatch(createGame(newGame));
+            }            
+            dispatch(createGame(newGame, keycloak.token));
             hideForm();
             setShowAlert(false);
             //Sets coordinates back to undefined, so location have to set again if adding another game

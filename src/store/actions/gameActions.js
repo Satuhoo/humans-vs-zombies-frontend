@@ -24,9 +24,11 @@ export const getGame = id => {
     };
 }
 
-export const createGame = game => {
+export const createGame = (game, jwtStr) => {
+    
     return dispatch => {
-        gameService.addGame(game)
+        console.log(jwtStr)
+        gameService.addGame(game, jwtStr)
         .then(response => {
             dispatch({
                 type: 'CREATE_GAME',
@@ -36,9 +38,9 @@ export const createGame = game => {
     }
 }
 
-export const updateGameById = (game) => {
+export const updateGameById = (game, jwtStr) => {
     return dispatch => {
-        gameService.updateGame(game.id, game)
+        gameService.updateGame(game.id, game, jwtStr)
         .then(response => {
             dispatch({
                 type: 'UPDATE_GAME',
@@ -49,9 +51,9 @@ export const updateGameById = (game) => {
     }
 }
 
-export const deleteGameById = (id) => {
+export const deleteGameById = (id, jwtStr) => {
     return dispatch => {
-        gameService.deleteGame(id)
+        gameService.deleteGame(id, jwtStr)
         .then(response => {
             console.log(response)
             dispatch({

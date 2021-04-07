@@ -11,7 +11,9 @@ import { useKeycloak } from '@react-keycloak/web';
 import MessageForm from '../forms/MessageForm'
 import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
+
 function ChatBox() {    
+
     const { keycloak } = useKeycloak();
     const dispatch = useDispatch();    
     const game = useSelector(state => state.gameReducer.game);
@@ -35,8 +37,7 @@ function ChatBox() {
     const setSelectedTab = (tab) =>{        
         setActiveTab(tab)          
     }
-    console.log(player)
-
+    
     const addMessage = (event) => {
         event.preventDefault();         
         const chatMessage = {

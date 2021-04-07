@@ -7,10 +7,13 @@ import Button from 'react-bootstrap/Button';
 import { confirmAlert } from 'react-confirm-alert';
 import '../styles/GameDetails.css';
 import '../styles/Alert.css';
+import { useKeycloak } from '@react-keycloak/web';  
 
 function DeleteGame({game}) {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { keycloak } = useKeycloak();
+     
 
     const deleteGame = (event) => {
         event.preventDefault();
@@ -22,7 +25,7 @@ function DeleteGame({game}) {
               {
                 label: 'Yes',
                 onClick: () => {
-                    dispatch(deleteGameById(game.id))
+                    dispatch(deleteGameById(game.id, keycloak.token))
                     history.push('/')
                 }
               },

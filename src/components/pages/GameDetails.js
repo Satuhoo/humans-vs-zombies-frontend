@@ -168,16 +168,17 @@ function GameDetails(props) {
                     </div>
                     <div className="grid-item item2">
                         {/* Shows the game state and chat for registered users and for admin */}
-                        {(registered || user.isAdmin) && <div>
-                            <h3>Game state</h3>
+                        <div>
+                        <h3>Game state</h3>
                             <GameState game={game}/>
-                            <ChatBox/>                         
-                        </div>}
+                        {(registered || user.isAdmin) && 
+                            <ChatBox/>} 
+                        </div>
                     </div>
                     {/* Checks if user is an admin, if user is registered to the game and the player 
                         state. Shows the right view depending on those*/}
                     {!user.isAdmin ? <div className="grid-item item3">
-                        {!registered &&
+                        {!registered && game.gameState === 'REGISTRATION' &&
                             <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
                                 handleRegistration={handleRegistration} />}
                         {registered && !showEditView && <div>

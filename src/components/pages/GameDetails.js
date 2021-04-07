@@ -153,7 +153,8 @@ function GameDetails(props) {
                         "/topic/deleteGame",
                         "/topic/addPlayer",
                         "/topic/updatePlayer",
-                        "/topic/deletePlayer"
+                        "/topic/deletePlayer",
+                        "/topic/addKill"
                     ]}
                     onMessage={ gameId => onReceiveMessage(gameId) }
                 />

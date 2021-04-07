@@ -31,7 +31,9 @@ function FactionChat(props) {
         <div className="chatBox">  
             <SockJsClient url={process.env.REACT_APP_SOCK_JS_URL}
                 topics={[
-                    "/topic/addChatMessage"
+                    "/topic/addChatMessage",
+                    "/topic/addKill",
+                    "/topic/updatePlayer"
                 ]}
                 onMessage={ gameId => onReceiveMessage(gameId) }
             />                

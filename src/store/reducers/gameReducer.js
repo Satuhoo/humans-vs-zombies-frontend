@@ -67,7 +67,8 @@ export function gameReducer(state = initialState, action) {
         case 'CLEAR_GAME':
             return {
                 ...state,
-                game: undefined
+                game: undefined,
+                statistics: undefined
             }
         case 'GET_STATISTICS':
             return {

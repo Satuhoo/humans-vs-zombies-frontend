@@ -18,6 +18,7 @@ import GameState from '../games/GameState';
 import CompletedGame from '../games/CompletedGame';
 import { useKeycloak } from '@react-keycloak/web';
 import { getPlayers } from '../../store/actions/playerActions';
+import { confirmAlert } from 'react-confirm-alert';
 
 function GameDetails(props) {    
     const id = props.match.params.id;
@@ -132,9 +133,10 @@ function GameDetails(props) {
         }
 
         if (msg.type === "ADD_KILL" && msg.victimId === player.id) {
-            window.alert(
-                `Uh-oh, you were turned into a zombie by ${msg.killerName}!${msg.story ? ` Story: "${msg.story}"` : ''}`
-            )
+            confirmAlert({
+                message:  `Uh-oh, you were turned into a zombie by ${msg.killerName}!${msg.story ? ` Story: "${msg.story}"` : ''}`,
+                buttons: [{label: 'Ok'}]
+            });
         }
     }
 

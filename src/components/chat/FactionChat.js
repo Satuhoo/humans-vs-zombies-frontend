@@ -15,9 +15,8 @@ function FactionChat(props) {
         dispatch(getChat(props.gameId, keycloak.token));     
     }, [props.gameId, props.playerId, dispatch, keycloak])
 
-    const formatTimeStamp = (timeStamp) =>{        
-        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric', timeZone:tz};
+    const formatTimeStamp = (timeStamp) =>{               
+        const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric', timeZone:'Europe/Helsinki'};
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
     }
 

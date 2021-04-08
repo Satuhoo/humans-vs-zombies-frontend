@@ -27,9 +27,10 @@ function ChatBox() {
         else
             setShowChat(true)
     }
+    
     const [newMessage, setNewMessage] = useState('');
     const [activeTab, setActiveTab] = useState('');
-
+    
     const handleMessageChange = (event) => {
         setNewMessage(event.target.value);        
     }
@@ -60,7 +61,7 @@ function ChatBox() {
             {showChat ? 
                 <div className = "chat">
                     <Tabs transition={false} onSelect={setSelectedTab}>
-                        <Tab eventKey="humanAndZombia" title="Game Chat">
+                        <Tab eventKey="humanAndZombie" title="Game Chat">
                             <HumanZombieChat gameId={game.id} playerId={player.id} player={player}/>
                         </Tab>
                         <Tab eventKey="global" title="Global Chat">
@@ -69,7 +70,7 @@ function ChatBox() {
                     </Tabs>            
                     <MessageForm gameId={game.id} layerId={player.id}
                     newMessage = {newMessage} onSubmit={addMessage} 
-                    handleMessageChange = {handleMessageChange}></MessageForm>            
+                    handleMessageChange = {handleMessageChange} activeTab= {activeTab} isAdmin={true}></MessageForm>            
                 </div>
         : null}</div>
         )

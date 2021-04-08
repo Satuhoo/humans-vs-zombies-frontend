@@ -41,4 +41,13 @@
     .header-container {
         flex-direction: column;
     }
+    .header-container > div {
+        margin: 0px 0px 10px 30px;
+    }
+    
+    #app-title {
+        color: orange;
+        margin: 20px 0px 0px 20px;
+    }
+    
 }

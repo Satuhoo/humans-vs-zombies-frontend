@@ -60,7 +60,7 @@ function CompletedGame({game, user}) {
                     <GameState game={game}/>
                     <br/>
                     <p className="statistics-title">Kills:</p>
-                    <ListGroup variant="flush">
+                    <ListGroup className="kill-list" variant="flush">
                         {statistics.killList.map((kill, index) => 
                             <ListGroup.Item key={index}>{kill.killerName} killed {kill.victimName} at {formatTimeStamp(kill.timeStamp)}</ListGroup.Item>
                         )}

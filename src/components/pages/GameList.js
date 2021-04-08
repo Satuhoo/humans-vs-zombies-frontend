@@ -81,13 +81,13 @@ function GameList() {
                 onMessage={ () => onReceiveMessage() }
             />
             <div className="game-list-container">
-                <div>
-                <h1>Games</h1>
-                {games.map((game) => 
-                    <Game game={game} key={game.id} gameClicked={handleClickGame}/>
-                )}
+                <div className="game-list">
+                    <h1>Games</h1>
+                    {games.map((game) => 
+                        <Game game={game} key={game.id} gameClicked={handleClickGame}/>
+                    )}
                 </div>
-                <div>
+                <div className="game-list-info">
                     {!keycloak.authenticated ? 
                         <p className="info-text">Log in to see more details and play the game!</p> :
                         <div>

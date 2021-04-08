@@ -103,7 +103,6 @@ function GameDetails(props) {
 
     //Updates the player's state from human to zombi or opposite, depends on the previous state
     const handlePlayerStateChange = playerItem => {
-        console.log(playerItem)
         confirmAlert({
             title: 'Turn player',
             message: `Are you sure to turn ${playerItem.playerName} into a ${playerItem.human ? 'zombi' : 'human'}`,

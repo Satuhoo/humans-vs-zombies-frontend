@@ -14,9 +14,11 @@ function PlayerList({gameId, handlePlayerStateChange}) {
     return (
         <div>
             <h3>Players</h3>
-            {players.map((player) => 
-                <Player key={player.id} player={player} handlePlayerStateChange={handlePlayerStateChange} />
-            )}
+            <div className="player-list">
+                {players.map((player) => 
+                    <Player key={player.id} player={player} handlePlayerStateChange={handlePlayerStateChange} />
+                )}
+            </div>
         </div>
     )
 }

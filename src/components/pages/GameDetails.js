@@ -103,21 +103,35 @@ function GameDetails(props) {
 
     //Updates the player's state from human to zombi or opposite, depends on the previous state
     const handlePlayerStateChange = playerItem => {
-        const changedPlayer = {
-            ...playerItem,
-            game: {
-                ...game,
-                players: [],
-                kills: [],
-                chat: null
-            },
-            messages: [],
-            kills: [],
-            human: !playerItem.human,
-            victimOf: null
-        }
-
-        dispatch(updatePlayer(game.id, changedPlayer))
+        console.log(playerItem)
+        confirmAlert({
+            title: 'Turn player',
+            message: `Are you sure to turn ${playerItem.playerName} into a ${playerItem.human ? 'zombi' : 'human'}`,
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    const changedPlayer = {
+                        ...playerItem,
+                        game: {
+                            ...game,
+                            players: [],
+                            kills: [],
+                            chat: null
+                        },
+                        messages: [],
+                        kills: [],
+                        human: !playerItem.human,
+                        victimOf: null
+                    }
+                    dispatch(updatePlayer(game.id, changedPlayer))
+                }
+              },
+              {
+                label: 'No',
+              }
+            ]
+          });
     }
 
     //Helper method which hides the edit view

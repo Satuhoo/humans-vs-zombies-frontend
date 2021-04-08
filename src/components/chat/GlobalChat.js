@@ -14,8 +14,7 @@ function GlobalChat(props) {
     }, [props.gameId, props.playerId, dispatch]) 
     
     const formatTimeStamp = (timeStamp) =>{        
-        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric', timeZone:tz};
+        const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric', timeZone:'Europe/Helsinki'};
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
     }
 

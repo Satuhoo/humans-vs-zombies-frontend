@@ -4,11 +4,11 @@ Humans vs. Zombies (HvZ) is a game of tag played at schools, camps, neighborhood
 
 ## Contributors
 
-Maija Haka, Okko Partanen and Satu Heikkonen
+[Maija Haka](https://github.com/maijahaka), [Okko Partanen](https://github.com/okarp) and [Satu Heikkonen](https://github.com/Satuhoo)
 
 ## Usage
 
-The application can be used at humans-vs-zombies.vercel.app
+The application can be used at [humans-vs-zombies.vercel.app](https://humans-vs-zombies.vercel.app/)
 
 ## Pages
 
@@ -20,9 +20,11 @@ In addition to this, admin can create a new game by using the 'add game'- button
 
 ### Game Details page
 
-**Game states:** registration, in progress or complete
-**Player states:** human or zombie
-**User roles:** user or admin
+**Game states:** Registration, In progress or Complete  
+
+**Player states:** Human or Zombie  
+
+**User roles:** User or Admin  
 
 Game Details page requires the authentication. If the game is clicked in the Landing page and user has not logged in, the application redirects to the keycloak’s login page. 
 There are multiple different views in the game details page, by depending about the game’s state, player’s state, user’s role and if the user has registered to the game. All authenticated users can see the basic details of the game and the map.
@@ -39,18 +41,23 @@ Game is completed when the admin finishes it by clicking the ‘end game’ butt
 
 The following functionalities are left out of the application requirements because of the time limitation. These functionalities are in this README for the possible further development.
 
-1. Squads
+**Squads**
+
 Squads would be the smaller groups inside of the game. After registration in the squad, it would display the names, relative ranks and state of each of the members of your squad. 
-2. Missions
+
+**Missions**
+
 On longer games there could be safe zones in the game area. The admin would create missions and add mission markers to the map to get players out of the safe zone.
-3. Admin chat
+
+**Admin chat**
+
 In the current version of application admin can see all messages, but only write to the global chat. In the next versions, admin could have a chance to send messages also to human or zombie chat.
 
 ## Installation
 
-See the backend installation at https://github.com/maijahaka/humans-vs-zombies-backend.
+See the **backend installation** at https://github.com/maijahaka/humans-vs-zombies-backend.
 
-Frontend installation: 
+**Frontend installation**
 
 Clone the source code:
 `git clone https://github.com/Satuhoo/humans-vs-zombies-frontend.git`
@@ -65,3 +72,4 @@ Run the app in the development mode:
 `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+

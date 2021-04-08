@@ -19,6 +19,7 @@ import CompletedGame from '../games/CompletedGame';
 import { useKeycloak } from '@react-keycloak/web';
 import { getPlayers } from '../../store/actions/playerActions';
 import { confirmAlert } from 'react-confirm-alert';
+import { resetErrors } from "../../store/actions/errorActions";
 
 function GameDetails(props) {    
     const id = props.match.params.id;
@@ -40,6 +41,11 @@ function GameDetails(props) {
         dispatch(getGame(id));
         dispatch(getLoggedPlayer(id, keycloak.token));
         dispatch(getPlayers(id));
+
+        // Clear error messages when the component is unmounted
+        return (() => {
+            dispatch(resetErrors())
+        })
     }, [id, dispatch, keycloak.token])
 
     //Checks if the component is already loaded the needed data
@@ -143,6 +149,7 @@ function GameDetails(props) {
             dispatch(getGame(id))
             dispatch(getLoggedPlayer(id, keycloak.token))
             dispatch(getPlayers(id))
+            dispatch(resetErrors())
         }
 
         if (msg.type === "ADD_KILL" && msg.victimId === player.id) {

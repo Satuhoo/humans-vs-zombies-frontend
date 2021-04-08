@@ -5,6 +5,9 @@ export const killPlayer = (gameId, kill) => {
     killService.killPlayer(gameId, kill)
       .then(response => {
         dispatch({
+          type: 'RESET_ERRORS'
+        })
+        dispatch({
           type: 'KILL_PLAYER',
           kill: response.data
         })
@@ -13,6 +16,11 @@ export const killPlayer = (gameId, kill) => {
           kill: response.data
         })
       })
+      .catch(() => {
+        dispatch({
+          type: 'KILL_ERROR'
+        })
+      }) 
   }
 }
 

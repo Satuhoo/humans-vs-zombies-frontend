@@ -123,7 +123,7 @@ function GameDetails(props) {
                         human: !playerItem.human,
                         victimOf: null
                     }
-                    dispatch(updatePlayer(game.id, changedPlayer))
+                    dispatch(updatePlayer(game.id, changedPlayer, keycloak.token))
                 }
               },
               {

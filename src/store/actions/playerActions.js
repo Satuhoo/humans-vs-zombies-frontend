@@ -46,9 +46,9 @@ export const clearPlayer = () => ({
     type: 'CLEAR_PLAYER'
 })
 
-export const updatePlayer = (gameId, player) => {
+export const updatePlayer = (gameId, player, jwtStr) => {
     return dispatch => {
-        playerService.updatePlayer(gameId, player)
+        playerService.updatePlayer(gameId, player, jwtStr)
         .then(response => {
             dispatch({
                 type: 'UPDATE_PLAYER',

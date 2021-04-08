@@ -21,8 +21,12 @@ class PlayerService {
         return http.get(`/games/${gameId}/players`)
     }
 
-    updatePlayer(gameId, player) {
-        return http.put(`/games/${gameId}/players/${player.id}`, player)
+    updatePlayer(gameId, player, jwtStr) {
+        return http.put(`/games/${gameId}/players/${player.id}`, player, {
+            'headers': {
+              'Authorization': 'Bearer ' + jwtStr
+            }
+        })
     }
 }
 

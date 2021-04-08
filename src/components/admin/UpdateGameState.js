@@ -45,7 +45,7 @@ function UpdateGameState({game}) {
                       patientZero: true,
                       victimOf: null
                     }
-                    dispatch(updatePlayer(game.id, updatePatientZero));
+                    dispatch(updatePlayer(game.id, updatePatientZero, keycloak.token));
                 }
               },
               {

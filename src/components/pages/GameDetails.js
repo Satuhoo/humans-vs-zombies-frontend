@@ -204,14 +204,15 @@ function GameDetails(props) {
                         {!registered && game.gameState === 'REGISTRATION' &&
                             <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
                                 handleRegistration={handleRegistration} />}
-                        {registered && !showEditView && <div>
+                        {registered && game.gameState === 'IN_PROGRESS' ? <div>
                             <p>You are a <b>{player.human ? 'human' : 'zombie'}</b></p>
                             {player.human 
                                 ? <div>Your bite code is <b>{player.biteCode}</b></div>
                                 : <BiteCodeForm biteCode={biteCode} story={story} onSubmit={handleBite} 
                                 handleBiteCodeChange={handleBiteCodeChange} handleStoryChange={handleStoryChange}/>
                             }
-                        </div>}    
+                        </div>: 
+                        <p>Game is not started yet</p>}    
                     </div>
                     : <PlayerList gameId={id} handlePlayerStateChange={handlePlayerStateChange} /> }  
                     <div className="grid-item item4">

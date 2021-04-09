@@ -14,6 +14,7 @@ function Map(props) {
       dispatch(getKills(props.game.id));      
     }, [props.game.id, dispatch])
 
+    // fetch updated data when receiving a relevant websocket message
     const onReceiveMessage = msg => {
       if (msg.gameId === props.game.id) {
         dispatch(getKills(props.game.id)); 

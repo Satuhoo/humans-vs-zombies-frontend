@@ -218,18 +218,25 @@ function GameDetails(props) {
                     {/* Checks if user is an admin, if user is registered to the game and the player 
                         state. Shows the right view depending on those*/}
                     {!user.isAdmin ? <div className="grid-item item3">
-                        {!registered && game.gameState === 'REGISTRATION' &&
-                            <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
-                                handleRegistration={handleRegistration} />}
-                        {registered && game.gameState === 'IN_PROGRESS' ? <div>
-                            <p>You are a <b>{player.human ? 'human' : 'zombie'}</b></p>
-                            {player.human 
-                                ? <div>Your bite code is <b>{player.biteCode}</b></div>
-                                : <BiteCodeForm biteCode={biteCode} story={story} onSubmit={handleBite} 
-                                handleBiteCodeChange={handleBiteCodeChange} handleStoryChange={handleStoryChange}/>
-                            }
-                        </div>: 
-                        <p>Game is not started yet</p>}    
+                        {game.gameState === 'REGISTRATION' && <div>
+                            {!registered ?
+                                <GameRegistrationForm playerName={playerName} handlePlayerNameChange={handlePlayerNameChange} 
+                                    handleRegistration={handleRegistration} />:
+                                    <p>Game is not started yet</p>}
+                            </div>}
+                        {game.gameState === 'IN_PROGRESS' && <div>
+                            {registered ? <div>
+                                <p>You are a <b>{player.human ? 'human' : 'zombie'}</b></p>
+                                {player.human 
+                                    ? <div>Your bite code is <b>{player.biteCode}</b></div>
+                                    : <BiteCodeForm biteCode={biteCode} story={story} onSubmit={handleBite} 
+                                    handleBiteCodeChange={handleBiteCodeChange} handleStoryChange={handleStoryChange}/>
+                                }
+                                </div>: 
+                                <p>Game is already going, you can't register anymore</p>
+                                }
+                            </div> 
+                        }    
                     </div>
                     : <PlayerList gameId={id} handlePlayerStateChange={handlePlayerStateChange} /> }  
                     <div className="grid-item item4">

@@ -6,7 +6,7 @@ import '../styles/GameDetails.css';
 import { useEffect, useState } from 'react';
 import { getStatistics } from '../../store/actions/gameActions';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { useEffect, useState } from "react";
+import Spinner from 'react-bootstrap/Spinner';
 
 //Shown when game state is complete
 //Returns the statistics of the completed game

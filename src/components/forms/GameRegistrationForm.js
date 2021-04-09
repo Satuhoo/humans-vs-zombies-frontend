@@ -3,12 +3,12 @@ import Button from 'react-bootstrap/Button';
 
 function GameRegistrationForm({playerName, handlePlayerNameChange, handleRegistration}) {
     return (
-        <div className="form-container">
+        <Form className="form-container" onSubmit={handleRegistration}>
             <Form.Label className="form-label">Your player name</Form.Label>
             <Form.Control value={playerName} onChange={handlePlayerNameChange} />
             <br/>
-            <Button variant="info" onClick={handleRegistration}>Join</Button>
-        </div>
+            <Button variant="info">Join</Button>
+        </Form>
     )
 }
 

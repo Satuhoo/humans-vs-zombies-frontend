@@ -41,7 +41,7 @@ function GameDetails(props) {
     useEffect(() => {
         dispatch(getGame(id));
         dispatch(getLoggedPlayer(id, keycloak.token));
-        dispatch(getPlayers(id));
+        dispatch(getPlayers(id, keycloak.token));
 
         // Clear error messages when the component is unmounted
         return (() => {
@@ -155,7 +155,7 @@ function GameDetails(props) {
         if (String(msg.gameId) === id) {
             dispatch(getGame(id))
             dispatch(getLoggedPlayer(id, keycloak.token))
-            dispatch(getPlayers(id))
+            dispatch(getPlayers(id, keycloak.token))
             dispatch(resetErrors())
         }
 

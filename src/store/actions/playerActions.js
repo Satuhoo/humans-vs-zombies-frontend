@@ -30,9 +30,9 @@ export const getLoggedPlayer = (gameId, jwtStr) => {
     }
 }
 
-export const getPlayers = (gameId) => {
+export const getPlayers = (gameId, jwtStr) => {
     return dispatch => {
-        playerService.getPlayersByGameId(gameId)
+        playerService.getPlayersByGameId(gameId, jwtStr)
         .then(response => {
             dispatch({
                 type: 'GET_PLAYERS',

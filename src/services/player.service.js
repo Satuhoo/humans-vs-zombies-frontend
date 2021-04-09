@@ -17,8 +17,12 @@ class PlayerService {
         })
     }
 
-    getPlayersByGameId(gameId) {
-        return http.get(`/games/${gameId}/players`)
+    getPlayersByGameId(gameId, jwtStr) {
+        return http.get(`/games/${gameId}/players`, {
+            'headers': {
+              'Authorization': 'Bearer ' + jwtStr
+            }
+        })
     }
 
     updatePlayer(gameId, player, jwtStr) {

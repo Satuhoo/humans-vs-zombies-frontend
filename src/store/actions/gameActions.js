@@ -25,7 +25,6 @@ export const getGame = id => {
 }
 
 export const createGame = (game, jwtStr) => {
-    
     return dispatch => {
         console.log(jwtStr)
         gameService.addGame(game, jwtStr)

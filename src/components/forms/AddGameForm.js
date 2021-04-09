@@ -10,10 +10,11 @@ function AddGameForm(props) {
         <div>
             <Form onSubmit={props.onSubmit}>
                 <Form.Label className="form-label">Name</Form.Label>
-                <Form.Control value={props.name} onChange={props.handleNameChange} maxLength={30}/>
+                <Form.Control value={props.name} onChange={props.handleNameChange} maxLength={30} />
                 <Form.Label size="lg">Description</Form.Label>
                 <Form.Control as="textarea" rows={3} maxLength={255} value={props.description} 
-                        onChange={props.handleDescriptionChange} />
+                        onChange={props.handleDescriptionChange} 
+                        placeholder="Type the description and starting time of the game" />
                 <Form.Label size="lg">Rules</Form.Label>
                 <Form.Control as="textarea" rows={5} maxLength={255} value={props.rules} 
                         onChange={props.handleRulesChange} />

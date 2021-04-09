@@ -35,3 +35,7 @@ export const getAllKills = (gameId) => {
     })
   }
 }
+
+export const clearError = () => ({
+  type: 'RESET_ERRORS'
+})

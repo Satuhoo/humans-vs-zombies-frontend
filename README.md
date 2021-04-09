@@ -12,6 +12,8 @@ The backend source code can be found at https://github.com/maijahaka/humans-vs-z
 
 The application can be used at [humans-vs-zombies.vercel.app](https://humans-vs-zombies.vercel.app/)
 
+User manual: https://github.com/Satuhoo/humans-vs-zombies-frontend/blob/master/public/assets/hvz_userguide.pdf
+
 ## Pages
 
 ### Landing page

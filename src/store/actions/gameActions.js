@@ -26,7 +26,6 @@ export const getGame = id => {
 
 export const createGame = (game, jwtStr) => {
     return dispatch => {
-        console.log(jwtStr)
         gameService.addGame(game, jwtStr)
         .then(response => {
             dispatch({
@@ -54,7 +53,6 @@ export const deleteGameById = (id, jwtStr) => {
     return dispatch => {
         gameService.deleteGame(id, jwtStr)
         .then(response => {
-            console.log(response)
             dispatch({
                 type: 'DELETE_GAME',
                 payload: id

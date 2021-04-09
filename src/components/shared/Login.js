@@ -1,4 +1,3 @@
-  
 import React, {useEffect} from 'react';
 import { Redirect } from 'react-router-dom' 
 import { useKeycloak } from '@react-keycloak/web'
@@ -17,8 +16,7 @@ const LoginPage = () => {
         keycloak.onAuthSuccess(dispatch(login(keycloak.subject, keycloak.hasRealmRole('admin'))))        
       }}) 
 
-    if (initialized && keycloak.authenticated){
-      console.log(keycloak.token)    
+    if (initialized && keycloak.authenticated){  
       return <Redirect to='/games'/>
     }
 

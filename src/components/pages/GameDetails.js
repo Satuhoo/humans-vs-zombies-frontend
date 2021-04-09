@@ -155,6 +155,7 @@ function GameDetails(props) {
         setShowEditView(false);
     }
 
+    // fetch updated data when receiving a relevant websocket message
     const onReceiveMessage = msg => {
         if (String(msg.gameId) === id) {
             dispatch(getGame(id))

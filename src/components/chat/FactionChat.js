@@ -21,6 +21,7 @@ function FactionChat(props) {
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
     }
 
+    // fetch updated data when receiving a relevant websocket message
     const onReceiveMessage = msg => {
         if (msg.gameId === props.gameId) {
             dispatch(getChat(props.gameId, keycloak.token));

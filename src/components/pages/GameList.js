@@ -64,6 +64,7 @@ function GameList() {
         setShowAddGameButton(true);
     }
 
+    // fetch updated data when receiving a relevant websocket message
     const onReceiveMessage = () => {
         dispatch(getGames())
     }

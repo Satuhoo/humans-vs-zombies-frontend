@@ -6,8 +6,10 @@ import '../styles/GameDetails.css';
 import { useEffect, useState } from 'react';
 import { getStatistics } from '../../store/actions/gameActions';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { useEffect, useState } from "react";
 
 //Shown when game state is complete
+//Returns the statistics of the completed game
 function CompletedGame({game, user}) {
     const statistics = useSelector(state => state.gameReducer.statistics);
     const players = useSelector(state => state.playerReducer.players);
@@ -24,12 +26,18 @@ function CompletedGame({game, user}) {
         }
     }, [statistics])
 
+    //Changes the time stamp for more readable form
     const formatTimeStamp = (timeStamp) =>{        
         const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric'};
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
     }
 
-    if (loading) return null;
+    if (loading) return (
+        <div className="spinner">
+            <p>Loading the data</p>
+            <Spinner  animation="border" variant="warning" />
+        </div>
+    ) 
 
     return (
         <div>

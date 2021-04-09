@@ -15,6 +15,7 @@ function HumanZombieChat(props) {
         dispatch(getChat(props.gameId, keycloak.token));     
     }, [props.gameId, props.playerId, dispatch, keycloak])
 
+    //Changes the time stamp for more readable form
     const formatTimeStamp = (timeStamp) =>{        
         const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric'};
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);
@@ -27,7 +28,6 @@ function HumanZombieChat(props) {
     }
 
     return (
-
         <div className="chatBox">  
             <SockJsClient url={process.env.REACT_APP_SOCK_JS_URL} 
                 topics={[

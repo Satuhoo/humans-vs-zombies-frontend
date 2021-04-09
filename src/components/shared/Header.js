@@ -4,6 +4,7 @@ import { useKeycloak } from '@react-keycloak/web';
 
 function Header() {
     const {keycloak} = useKeycloak();
+    
     return (
         <div className="header-container">
             <h1 id="app-title">Humans vs. Zombies</h1>            

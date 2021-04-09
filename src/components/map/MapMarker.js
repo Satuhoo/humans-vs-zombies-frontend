@@ -2,8 +2,10 @@ import { Marker, Popup} from "react-leaflet";
 import L from 'leaflet';
 import gs from "../../graves.svg";
 
+//Adds the kill locations from the list to the map
 function MapMarker(props) {     
     
+    //Creates gravestone icon
     let newIcon = L.icon({
       iconUrl: gs,
       iconRetinaUrl: gs,        

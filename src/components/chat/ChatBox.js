@@ -1,19 +1,19 @@
-import '../styles/GameDetails.css';
 import FactionChat from './FactionChat'
 import GlobalChat from './GlobalChat'
 import HumanZombieChat from './HumanZombieChat'
 import { Tabs, Tab } from 'react-bootstrap';
 import { useState } from "react";
-import '../styles/GameDetails.css';
 import { useDispatch } from 'react-redux';
 import { submitGlobalMessage, submitMessage } from '../../store/actions/chatActions';
 import { useKeycloak } from '@react-keycloak/web';
 import MessageForm from '../forms/MessageForm'
 import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
+import '../styles/GameDetails.css';
 
 function ChatBox() {    
-
+    const [newMessage, setNewMessage] = useState('');
+    const [activeTab, setActiveTab] = useState('');
     const { keycloak } = useKeycloak();
     const dispatch = useDispatch();    
     const game = useSelector(state => state.gameReducer.game);
@@ -28,9 +28,6 @@ function ChatBox() {
             setShowChat(true)
     }
     
-    const [newMessage, setNewMessage] = useState('');
-    const [activeTab, setActiveTab] = useState('');
-    
     const handleMessageChange = (event) => {
         setNewMessage(event.target.value);        
     }
@@ -39,6 +36,8 @@ function ChatBox() {
         setActiveTab(tab)          
     }
     
+    //Checks from which chat the message has sent and calls the right action to add it correctly 
+    //to the database
     const addMessage = (event) => {
         event.preventDefault();         
         const chatMessage = {
@@ -53,6 +52,7 @@ function ChatBox() {
         setNewMessage('');
     }
 
+    //Checks the user's role and player's state and returns the right chats
     if (user.isAdmin){
         return (
             <div>

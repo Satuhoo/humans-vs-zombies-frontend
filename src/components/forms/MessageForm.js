@@ -5,7 +5,7 @@ import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 function MessageForm(props) {
     if (props.isAdmin === true && props.activeTab !== 'global'){
-    return null
+        return null
     }else{    
         return (
             <div >

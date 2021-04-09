@@ -13,6 +13,7 @@ function GlobalChat(props) {
         dispatch(getGlobalChat(props.gameId));              
     }, [props.gameId, props.playerId, dispatch]) 
     
+    //Changes the time stamp for more readable form
     const formatTimeStamp = (timeStamp) =>{        
         const options = { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric', timeZone:'Europe/Helsinki'};
         return new Date(timeStamp).toLocaleTimeString('en-GB', options);

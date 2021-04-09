@@ -7,7 +7,7 @@ function GameRegistrationForm({playerName, handlePlayerNameChange, handleRegistr
             <Form.Label className="form-label">Your player name</Form.Label>
             <Form.Control value={playerName} onChange={handlePlayerNameChange} />
             <br/>
-            <Button variant="info">Join</Button>
+            <Button variant="info" type="submit">Join</Button>
         </Form>
     )
 }

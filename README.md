@@ -2,6 +2,8 @@
 
 Humans vs. Zombies (HvZ) is a game of tag played at schools, camps, neighborhoods, libraries, and conventions around the world. The game simulates the exponential spread of a fictional zombie infection through a population. This application creates the base for the games to playing in the real world.
 
+The backend source code can be found at https://github.com/maijahaka/humans-vs-zombies-backend.
+
 ## Contributors
 
 [Maija Haka](https://github.com/maijahaka), [Okko Partanen](https://github.com/okarp) and [Satu Heikkonen](https://github.com/Satuhoo)
@@ -72,4 +74,6 @@ Run the app in the development mode:
 `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+Environment variables can be found  on env.development and .env.production files in the root folder. You can edit them as needed.
 

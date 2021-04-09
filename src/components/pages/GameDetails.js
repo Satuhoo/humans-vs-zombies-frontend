@@ -20,6 +20,7 @@ import { useKeycloak } from '@react-keycloak/web';
 import { getPlayers } from '../../store/actions/playerActions';
 import { confirmAlert } from 'react-confirm-alert';
 import { resetErrors } from "../../store/actions/errorActions";
+import Spinner from 'react-bootstrap/Spinner';
 
 function GameDetails(props) {    
     const id = props.match.params.id;
@@ -61,7 +62,13 @@ function GameDetails(props) {
         }
     }, [game, player])
 
-    if (loading) return null;
+    if (loading) return (
+        <div className="spinner">
+            <p>Loading the data</p>
+            <Spinner  animation="border" variant="warning" />
+        </div>
+    ) 
+
 
     //Registers the user to the game and create new player
     const handleRegistration = (event) => {

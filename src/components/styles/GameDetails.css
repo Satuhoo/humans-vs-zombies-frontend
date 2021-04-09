@@ -85,6 +85,11 @@
     overflow: auto;
 }
 
+.spinner {
+    text-align: center;
+    margin-top: 100px;
+}
+
 @media (max-width: 1100px) {
     .grid-container {
         grid-template-columns: 3fr 4fr;

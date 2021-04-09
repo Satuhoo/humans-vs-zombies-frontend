@@ -9,13 +9,19 @@ import { useKeycloak } from '@react-keycloak/web';
 import { useDispatch } from 'react-redux';
 import { login } from '../src/store/actions/userActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Spinner from 'react-bootstrap/Spinner';
 
 const App = () => {
   const { keycloak, initialized } = useKeycloak();
   const dispatch = useDispatch();
 
   if (!initialized) {
-    return <h4>Loading...</h4>; 
+    return (
+      <div className="spinner">
+          <p>Loading the keycloak server</p>
+          <Spinner  animation="border" variant="warning" />
+        </div>
+    )
   }
 
   // Checks if the user is logged in, fetchs the user data from the keycloak and send it to the redux
